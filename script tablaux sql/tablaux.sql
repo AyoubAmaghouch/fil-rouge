@@ -5,7 +5,8 @@ CREATE TABLE agences (
     telephone VARCHAR(20) NOT NULL,
     ville VARCHAR(100) NOT NULL,
     mot_de_passe VARCHAR(255) NOT NULL,
-    logo VARCHAR(255) NOT NULL
+    logo VARCHAR(255) NOT NULL,
+    statut_validation BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE marques (
