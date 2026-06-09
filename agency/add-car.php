@@ -1,96 +1,96 @@
-<?php
+    <?php
 
-session_start();
+    session_start();
 
-if (!isset($_SESSION['id_agence'])) {
-    header("Location: ../login.php");
-    exit();
-}
+    if (!isset($_SESSION['id_agence'])) {
+        header("Location: ../login.php");
+        exit();
+    } //if agence is not logged in, redirect to login page
 
-require_once '../config/db.php';
+    require_once '../config/db.php';
 
-$marques = $pdo->query("SELECT * FROM marques");
-?>
+    $marques = $pdo->query("SELECT * FROM marques"); //fetch all car brands to display in the form
+    ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ajouter une voiture</title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Ajouter une voiture</title>
+    </head>
+    <body>
 
-<h1>Ajouter une voiture</h1>
+    <h1>Ajouter une voiture</h1>
 
-<form action="../crud/add_voiture.php" method="POST" enctype="multipart/form-data">
+    <form action="../crud/add_voiture.php" method="POST" enctype="multipart/form-data">
 
-    <label>Marque :</label><br>
+        <label>Marque :</label><br>
 
-    <select name="id_marque" required>
-        <option value="">Choisir une marque</option>
+        <select name="id_marque" required>
+            <option value="">Choisir une marque</option>
 
-        <?php while($marque = $marques->fetch(PDO::FETCH_ASSOC)) { ?>
+            <?php while($marque = $marques->fetch(PDO::FETCH_ASSOC)) { ?> //loop for all brands
 
-            <option value="<?php echo $marque['id_marque']; ?>">
-                <?php echo $marque['nom_marque']; ?>
-            </option>
+                <option value="<?php echo $marque['id_marque']; ?>"> //option value is the brand id katysft ghire id deyala 
+                    <?php echo $marque['nom_marque']; ?>
+                </option>
 
-        <?php } ?>
+            <?php } ?>
 
-    </select>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <label>Modèle :</label><br>
-    <input type="text" name="modele" required>
+        <label>Modèle :</label><br>
+        <input type="text" name="modele" required>
 
-    <br><br>
+        <br><br>
 
-    <label>Carburant :</label><br>
+        <label>Carburant :</label><br>
 
-    <select name="carburant" required>
-        <option value="">Choisir</option>
-        <option value="Essence">Essence</option>
-        <option value="Diesel">Diesel</option>
-        <option value="Hybride">Hybride</option>
-        <option value="Electrique">Electrique</option>
-    </select>
+        <select name="carburant" required>
+            <option value="">Choisir</option>
+            <option value="Essence">Essence</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Hybride">Hybride</option>
+            <option value="Electrique">Electrique</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <label>Transmission :</label><br>
+        <label>Transmission :</label><br>
 
-    <select name="transmission" required>
-        <option value="">Choisir</option>
-        <option value="Manuelle">Manuelle</option>
-        <option value="Automatique">Automatique</option>
-    </select>
+        <select name="transmission" required>
+            <option value="">Choisir</option>
+            <option value="Manuelle">Manuelle</option>
+            <option value="Automatique">Automatique</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <label>Prix :</label><br>
-    <input type="number" step="0.01" name="prix" required>
+        <label>Prix :</label><br>
+        <input type="number" step="0.01" name="prix" required>
 
-    <br><br>
+        <br><br>
 
-    <label>Disponibilité :</label><br>
+        <label>Disponibilité :</label><br>
 
-    <select name="disponibilite" required>
-        <option value="1">Disponible</option>
-        <option value="0">Indisponible</option>
-    </select>
+        <select name="disponibilite" required>
+            <option value="1">Disponible</option>
+            <option value="0">Indisponible</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <label>Photo voiture :</label><br>
-    <input type="file" name="image" required>
+        <label>Photo voiture :</label><br>  
+        <input type="file" name="image" required>
 
-    <br><br>
+        <br><br>
 
-    <button type="submit">
-        Ajouter
-    </button>
+        <button type="submit">
+            Ajouter
+        </button>
 
-</form>
+    </form>
 
-</body>
-</html>
+    </body>
+    </html>

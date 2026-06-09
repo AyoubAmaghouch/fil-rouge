@@ -6,10 +6,10 @@ require_once '../config/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $id_agence = $_SESSION['id_agence'];
-
+    $id_agence = $_SESSION['id_agence']; //hfd agence
+//les données de formulaire
     $id_marque = $_POST['id_marque'];
-    $modele = $_POST['modele'];
+    $modele = $_POST['modele']; 
     $carburant = $_POST['carburant'];
     $transmission = $_POST['transmission'];
     $prix = $_POST['prix'];
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $disponibilite
     ]);
 
-    $id_voiture = $pdo->lastInsertId();
+    $id_voiture = $pdo->lastInsertId(); //Ch7al howa ID dyal a5er tomobila zedt?
 
 $image = uniqid() . "_" . $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];

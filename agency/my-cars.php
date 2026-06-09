@@ -15,7 +15,7 @@
             ON voitures.id_marque = marques.id_marque
             LEFT JOIN images_voitures
             ON voitures.id_voiture = images_voitures.id_voiture
-            WHERE voitures.id_agence = ?";
+            WHERE voitures.id_agence = ?"; //Jib ghir tomobilat dyal agence 3
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$_SESSION['id_agence']]);
@@ -45,7 +45,7 @@
             <th>Actions</th>
         </tr>
 
-        <?php foreach($voitures as $voiture) { ?>
+        <?php foreach($voitures as $voiture) { ?> //loop through the cars of the logged in agency and display them in a table
 
         <tr>
 

@@ -1,7 +1,7 @@
 <?php
 
-$host = "localhost";
-$dbname = "vicity_car";
+$host = "localhost"; //datbase host 
+$dbname = "vicity_car"; //database name
 $username = "root";
 $password = "";
 

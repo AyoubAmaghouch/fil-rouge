@@ -19,8 +19,15 @@
         <label>Téléphone :</label><br>
         <input type="text" name="telephone" required><br><br>
 
+        <label>WhatsApp :</label><br>
+        <input type="text" name="whatsapp" placeholder="212612345678" required><br><br>
+
         <label>Ville :</label><br>
         <input type="text" name="ville" required><br><br>
+
+        <label>Lien Google Maps :</label><br>
+        <input type="url" name="localisation"
+        placeholder="https://maps.google.com/?q=..." required><br><br>
 
         <label>Mot de passe :</label><br>
         <input type="password" name="mot_de_passe" required><br><br>
@@ -28,7 +35,9 @@
         <label>Logo :</label><br>
         <input type="file" name="logo" required><br><br>
 
-        <button type="submit">S'inscrire</button>
+        <button type="submit">
+            S'inscrire
+        </button>
 
     </form>
 
