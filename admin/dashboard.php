@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['id_admin'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+require_once '../config/db.php';
 require_once '../config/db.php';
 
 $nb_agences = $pdo->query("SELECT COUNT(*) FROM agences")
