@@ -17,7 +17,6 @@
         <label>Mot de passe :</label><br>
         <input type="password" name="mot_de_passe" required>
         <br><br>
-
         <button type="submit">
             Se connecter
         </button>
