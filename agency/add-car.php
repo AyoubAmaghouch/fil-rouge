@@ -30,7 +30,7 @@
 
             <?php while($marque = $marques->fetch(PDO::FETCH_ASSOC)) { ?> //loop for all brands
 
-                <option value="<?php echo $marque['id_marque']; ?>"> //option value is the brand id katysft ghire id deyala 
+                <option value="<?php echo $marque['id_marque']; ?>"> 
                     <?php echo $marque['nom_marque']; ?>
                 </option>
 
