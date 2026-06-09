@@ -26,6 +26,11 @@ if (!isset($_SESSION['id_agence'])) {
     <a href="add-car.php">
         Ajouter une voiture
     </a>
+    <p>
+    <a href="../logout.php">
+        Déconnexion
+    </a>
+</p>
 
 </body>
 </html>
