@@ -1,0 +1,69 @@
+/* ===== NAVBAR ===== */
+
+.custom-navbar{
+    background:#070b11;
+    padding:20px 0;
+    border-bottom:2px solid rgba(0,245,255,0.35);
+    box-shadow:0 0 20px rgba(0,245,255,0.15);
+}
+
+.logo{
+    color:#00F5FF !important;
+    font-size:2rem;
+    font-weight:700;
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+}
+.nav-link{
+    color:#d9d9d9 !important;
+    font-size:1.1rem;
+    font-weight:600;
+    margin:0 18px;
+    font-family:'Poppins',sans-serif;
+    position:relative;
+}
+
+.nav-link::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:3px;
+    background:#ffb6d9;
+    transition:0.3s;
+}
+
+.nav-link:hover::after{
+    width:100%;
+}
+
+.nav-link:hover{
+    color:#ffb6d9 !important;
+}
+
+.register-btn{
+    background:#00F5FF;
+    color:#000 !important;
+    border-radius:40px;
+    padding:10px 35px;
+    font-weight:700;
+    text-decoration:none;
+}
+.register-btn:hover{
+    background:#ffffff;
+    transform:translateY(-2px);
+}
+
+.navbar-toggler{
+    border:1px solid #00F5FF;
+}
+.active{
+    color:#ffb6d9 !important;
+}
+
+.active::after{
+    width:100%;
+}
+
+/* ===== FIN NAVBAR ===== */
