@@ -5,7 +5,7 @@
     <!-- Dark overlay layer -->
     <div class="vc-footer-overlay"></div>
 
-    <div class="container position-relative" style="z-index:2;">
+    <div class="container position-relative vc-footer-inner">
 
         <div class="row g-4 g-lg-5">
 

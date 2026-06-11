@@ -1,64 +1,121 @@
 <?php
 
+$page_css = "assets/css/agences.css";
 require_once 'config/db.php';
 
-$sql = "SELECT * FROM agences
-        WHERE statut_validation = 1";
+/* Récupérer toutes les agences validées */
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
+$sql_agences = "SELECT id_agence, nom_agence, ville, logo, telephone, email, whatsapp, localisation
+                FROM agences
+                WHERE statut_validation = 1
+                ORDER BY id_agence DESC";
 
-$agences = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-include 'includes/header.php';
-include 'includes/navbar.php';
+$agences = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<div class="container mt-5">
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/navbar.php'; ?>
 
-    <h1 class="mb-4">
-        Nos Agences
-    </h1>
+<div class="vc-agences-page">
 
-    <div class="row">
+    <!-- ===== PAGE BANNER ===== -->
 
-        <?php foreach($agences as $agence) { ?>
+    <section class="vc-agences-banner">
 
-            <div class="col-md-4 mb-4">
+        <div class="container">
 
-                <div class="card h-100">
+            <div class="vc-section-header text-center">
+                <span class="vc-section-tag">NOS PARTENAIRES</span>
+                <h1 class="vc-section-title">Nos Agences</h1>
+                <p class="vc-section-subtitle">
+                    Des agences de confiance partout au Maroc
+                </p>
+                <div class="vc-title-line"></div>
+            </div>
 
-                    <img
-                    src="assets/images/agences/<?php echo $agence['logo']; ?>"
-                    class="card-img-top"
-                    alt="Logo Agence">
+        </div>
 
-                    <div class="card-body">
+    </section>
 
-                        <h5 class="card-title">
-                            <?php echo $agence['nom_agence']; ?>
-                        </h5>
+    <!-- ===== AGENCIES LISTING SECTION ===== -->
 
-                        <p>
-                            <strong>Ville :</strong>
-                            <?php echo $agence['ville']; ?>
-                        </p>
+    <section class="vc-agences-listing">
 
-                        <p>
-                            <strong>Téléphone :</strong>
-                            <?php echo $agence['telephone']; ?>
-                        </p>
+        <div class="container">
 
-                    </div>
+            <!-- Results count -->
+
+            <div class="vc-agences-results">
+                <span class="vc-agences-count">
+                    <?php echo count($agences); ?> agence<?php echo count($agences) > 1 ? 's' : ''; ?> partenaire<?php echo count($agences) > 1 ? 's' : ''; ?>
+                </span>
+            </div>
+
+            <?php if(!empty($agences)) { ?>
+
+                <!-- Agencies Grid — same Bootstrap grid as index.php -->
+
+                <div class="row g-4">
+
+                    <?php foreach($agences as $agence) { ?>
+
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+
+                            <a href="agence-details.php?id=<?php echo $agence['id_agence']; ?>" class="vc-agency-link-card">
+
+                                <div class="vc-agency-card">
+
+                                    <!-- Logo -->
+                                    <div class="vc-agency-logo-wrap">
+                                        <img
+                                            src="assets/images/agences/<?php echo htmlspecialchars($agence['logo']); ?>"
+                                            alt="<?php echo htmlspecialchars($agence['nom_agence']); ?>"
+                                            class="vc-agency-img"
+                                        >
+                                    </div>
+
+                                    <!-- Body -->
+                                    <div class="vc-agency-body">
+
+                                        <h5 class="vc-agency-name"><?php echo htmlspecialchars($agence['nom_agence']); ?></h5>
+
+                                        <div class="vc-agency-meta">
+                                            <span class="vc-agency-city">
+                                                <i class="bi bi-geo-alt-fill"></i>
+                                                <?php echo htmlspecialchars($agence['ville']); ?>
+                                            </span>
+                                            <span class="vc-agency-phone">
+                                                <i class="bi bi-telephone-fill"></i>
+                                                <?php echo htmlspecialchars($agence['telephone']); ?>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    <?php } ?>
 
                 </div>
 
-            </div>
+            <?php } else { ?>
 
-        <?php } ?>
+                <!-- Empty State -->
+                <div class="vc-agences-empty">
+                    <i class="bi bi-building vc-agences-empty-icon"></i>
+                    <p>Aucune agence disponible pour le moment.</p>
+                </div>
 
-    </div>
+            <?php } ?>
+
+        </div>
+
+    </section>
 
 </div>
 

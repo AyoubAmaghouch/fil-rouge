@@ -28,9 +28,17 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>Mes voitures</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mes Voitures — VICITY CAR</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/backend.css">
     </head>
     <body>
+
+    <nav class="vc-back-nav">
+        <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
+        <a href="../index.php">🏠 Accueil</a>
+    </nav>
 
     <h1>Mes voitures</h1>
 
@@ -45,8 +53,7 @@
             <th>Actions</th>
         </tr>
 
-        <?php foreach($voitures as $voiture) { ?> //loop through the cars of the logged in agency and display them in a table
-
+        <?php foreach($voitures as $voiture) { ?> 
         <tr>
 
             <td><?php echo $voiture['id_voiture']; ?></td>

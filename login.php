@@ -1,32 +1,61 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion Agence</title>
-</head>
 <?php
-$page_css = "assets/css/auth.css";
+$page_css = "assets/css/login.css";
 ?>
 
 <?php include 'includes/header.php'; ?>
-<body>
+<?php include 'includes/navbar.php'; ?>
 
-    <h2>Connexion Agence</h2>
+<div class="vc-login-page">
 
-    <form action="crud/login_agence.php" method="POST">
+    <div class="vc-login-container">
 
-        <label>Email :</label><br>
-        <input type="email" name="email" required>
-        <br><br>
+        <!-- ===== DECORATIVE GLOW ===== -->
 
-        <label>Mot de passe :</label><br>
-        <input type="password" name="mot_de_passe" required>
-        <br><br>
-        <button type="submit">
-            Se connecter
-        </button>
+        <div class="vc-login-glow"></div>
 
-    </form>
+        <!-- ===== LOGIN CARD ===== -->
 
-</body>
-</html>
+        <div class="vc-login-card">
+
+            <div class="vc-login-header">
+                <h2>Connexion Agence</h2>
+                <p>Accédez à votre espace agence</p>
+            </div>
+
+            <form action="crud/login_agence.php" method="POST" class="vc-login-form">
+
+                <div class="vc-form-group">
+                    <label for="email">
+                        <i class="bi bi-envelope-fill"></i> Email
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                </div>
+
+                <div class="vc-form-group">
+                    <label for="mot_de_passe">
+                        <i class="bi bi-lock-fill"></i> Mot de passe
+                    </label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="vc-login-btn">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Se connecter
+                </button>
+
+            </form>
+
+            <div class="vc-login-footer">
+                <p>
+                    Pas encore de compte ?
+                    <a href="register.php">S'inscrire</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<?php include 'includes/footer.php'; ?>

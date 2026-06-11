@@ -1,5 +1,6 @@
 <?php
 
+$page_css = "assets/css/cars.css";
 require_once 'config/db.php';
 
 /* Filtres */
@@ -105,156 +106,200 @@ $villes = $pdo->query("
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Nos Voitures</title>
-</head>
-<body>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/navbar.php'; ?>
 
-<h1>Nos Voitures</h1>
+<div class="vc-cars-page">
 
-<form method="GET">
+    <!-- ===== PAGE BANNER ===== -->
 
-    <select name="marque">
+    <section class="vc-cars-banner">
 
-        <option value="">Toutes les marques</option>
+        <div class="container">
 
-        <?php while($m = $marques->fetch(PDO::FETCH_ASSOC)) { ?>
+            <div class="vc-section-header text-center">
+                <span class="vc-section-tag">NOTRE FLOTTE</span>
+                <h1 class="vc-section-title">Nos Voitures</h1>
+                <p class="vc-section-subtitle">
+                    Découvrez notre sélection de véhicules premium disponibles à la location
+                </p>
+                <div class="vc-title-line"></div>
+            </div>
 
-            <option
-                value="<?php echo $m['nom_marque']; ?>"
-                <?php if($marque == $m['nom_marque']) echo "selected"; ?>
-            >
-                <?php echo $m['nom_marque']; ?>
-            </option>
+        </div>
 
-        <?php } ?>
+    </section>
 
-    </select>
+    <!-- ===== FILTERS ===== -->
 
-    <select name="transmission">
+    <div class="container">
 
-        <option value="">Toutes les transmissions</option>
+        <form method="GET" action="cars.php" class="vc-cars-filters">
 
-        <?php while($t = $transmissions->fetch(PDO::FETCH_ASSOC)) { ?>
+            <select name="marque">
+                <option value="">Toutes les marques</option>
+                <?php while($m = $marques->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <option
+                        value="<?php echo $m['nom_marque']; ?>"
+                        <?php if($marque == $m['nom_marque']) echo "selected"; ?>
+                    >
+                        <?php echo $m['nom_marque']; ?>
+                    </option>
+                <?php } ?>
+            </select>
 
-            <option
-                value="<?php echo $t['transmission']; ?>"
-                <?php if($transmission == $t['transmission']) echo "selected"; ?>
-            >
-                <?php echo $t['transmission']; ?>
-            </option>
+            <select name="transmission">
+                <option value="">Toutes les transmissions</option>
+                <?php while($t = $transmissions->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <option
+                        value="<?php echo $t['transmission']; ?>"
+                        <?php if($transmission == $t['transmission']) echo "selected"; ?>
+                    >
+                        <?php echo $t['transmission']; ?>
+                    </option>
+                <?php } ?>
+            </select>
 
-        <?php } ?>
+            <select name="carburant">
+                <option value="">Tous les carburants</option>
+                <?php while($c = $carburants->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <option
+                        value="<?php echo $c['carburant']; ?>"
+                        <?php if($carburant == $c['carburant']) echo "selected"; ?>
+                    >
+                        <?php echo $c['carburant']; ?>
+                    </option>
+                <?php } ?>
+            </select>
 
-    </select>
+            <select name="ville">
+                <option value="">Toutes les villes</option>
+                <?php while($v = $villes->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <option
+                        value="<?php echo $v['ville']; ?>"
+                        <?php if($ville == $v['ville']) echo "selected"; ?>
+                    >
+                        <?php echo $v['ville']; ?>
+                    </option>
+                <?php } ?>
+            </select>
 
-    <select name="carburant">
+            <button type="submit" class="vc-filter-btn">
+                <i class="bi bi-funnel-fill"></i> Filtrer
+            </button>
 
-        <option value="">Tous les carburants</option>
+            <a href="cars.php" class="vc-reset-btn">
+                <i class="bi bi-arrow-counterclockwise"></i> Réinitialiser
+            </a>
 
-        <?php while($c = $carburants->fetch(PDO::FETCH_ASSOC)) { ?>
+        </form>
 
-            <option
-                value="<?php echo $c['carburant']; ?>"
-                <?php if($carburant == $c['carburant']) echo "selected"; ?>
-            >
-                <?php echo $c['carburant']; ?>
-            </option>
+    </div>
 
-        <?php } ?>
+    <!-- ===== CARS LISTING SECTION ===== -->
 
-    </select>
+    <section class="vc-cars-listing">
 
-    <select name="ville">
+        <div class="container">
 
-        <option value="">Toutes les villes</option>
+            <!-- Results count -->
 
-        <?php while($v = $villes->fetch(PDO::FETCH_ASSOC)) { ?>
+            <div class="vc-cars-results">
+                <span class="vc-cars-count">
+                    <?php echo count($voitures); ?> véhicule<?php echo count($voitures) > 1 ? 's' : ''; ?> trouvé<?php echo count($voitures) > 1 ? 's' : ''; ?>
+                </span>
+            </div>
 
-            <option
-                value="<?php echo $v['ville']; ?>"
-                <?php if($ville == $v['ville']) echo "selected"; ?>
-            >
-                <?php echo $v['ville']; ?>
-            </option>
+            <?php if(!empty($voitures)) { ?>
 
-        <?php } ?>
+                <!-- Cars Grid — same Bootstrap grid as index.php -->
 
-    </select>
+                <div class="row g-4">
 
-    <button type="submit">
-        Filtrer
-    </button>
+                    <?php foreach($voitures as $voiture) { ?>
 
-    <a href="cars.php">
-        Réinitialiser
-    </a>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
 
-</form>
+                            <div class="vc-car-card">
 
-<br>
+                                <!-- Image -->
+                                <div class="vc-car-img-wrap">
+                                    <img
+                                        src="assets/images/voitures/<?php echo !empty($voiture['image']) ? htmlspecialchars($voiture['image']) : 'default.jpg'; ?>"
+                                        alt="<?php echo htmlspecialchars($voiture['nom_marque'] . ' ' . $voiture['modele']); ?>"
+                                        class="vc-car-img"
+                                    >
+                                    <div class="vc-car-img-overlay"></div>
 
-<?php foreach($voitures as $voiture) { ?>
+                                    <?php if($voiture['disponibilite'] == 1) { ?>
+                                        <span class="vc-car-badge vc-badge-dispo">Disponible</span>
+                                    <?php } else { ?>
+                                        <span class="vc-car-badge vc-badge-indispo">Indisponible</span>
+                                    <?php } ?>
+                                </div>
 
-<div style="border:1px solid black; padding:10px; margin:10px;">
+                                <!-- Body -->
+                                <div class="vc-car-body">
 
-    <img
-    src="assets/images/voitures/<?php echo $voiture['image']; ?>"
-    width="200">
+                                    <div class="vc-car-brand"><?php echo htmlspecialchars($voiture['nom_marque']); ?></div>
+                                    <h5 class="vc-car-model"><?php echo htmlspecialchars($voiture['modele']); ?></h5>
 
-    <h3>
-        <?php echo $voiture['nom_marque']; ?>
-        <?php echo $voiture['modele']; ?>
-    </h3>
+                                    <!-- Info rows -->
+                                    <div class="vc-car-meta-list">
+                                        <span class="vc-car-meta-item">
+                                            <i class="bi bi-geo-alt-fill"></i>
+                                            <?php echo htmlspecialchars($voiture['ville']); ?>
+                                        </span>
+                                        <span class="vc-car-meta-item">
+                                            <i class="bi bi-fuel-pump-fill"></i>
+                                            <?php echo htmlspecialchars($voiture['carburant']); ?>
+                                        </span>
+                                        <span class="vc-car-meta-item">
+                                            <i class="bi bi-gear-wide-connected"></i>
+                                            <?php echo htmlspecialchars($voiture['transmission']); ?>
+                                        </span>
+                                    </div>
 
-    <p>
-        Ville :
-        <?php echo $voiture['ville']; ?>
-    </p>
+                                    <!-- Footer — same structure as index.php -->
+                                    <div class="vc-car-footer">
+                                        <div class="vc-car-price">
+                                            <span class="vc-price-value"><?php echo number_format($voiture['prix'], 0, ',', ' '); ?></span>
+                                            <span class="vc-price-unit">DH / Jour</span>
+                                        </div>
+                                        <a href="car-details.php?id=<?php echo $voiture['id_voiture']; ?>" class="vc-car-btn">
+                                            Voir détails
+                                            <span class="vc-btn-arrow">&rarr;</span>
+                                        </a>
+                                    </div>
 
-    <p>
-        Carburant :
-        <?php echo $voiture['carburant']; ?>
-    </p>
+                                </div>
 
-    <p>
-        Transmission :
-        <?php echo $voiture['transmission']; ?>
-    </p>
-    <p>
-    Disponibilité :
+                            </div>
 
-    <?php if($voiture['disponibilite'] == 1) { ?>
+                        </div>
 
-        <span style="color:green;">
-            Disponible
-        </span>
+                    <?php } ?>
 
-    <?php } else { ?>
+                </div>
 
-        <span style="color:red;">
-            Indisponible
-        </span>
+            <?php } else { ?>
 
-    <?php } ?>
+                <!-- Empty State -->
+                <div class="vc-cars-empty">
+                    <i class="bi bi-car-front-fill vc-cars-empty-icon"></i>
+                    <p>Aucune voiture ne correspond à vos critères.</p>
+                    <a href="cars.php" class="vc-view-all-btn">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        Réinitialiser les filtres
+                    </a>
+                </div>
 
-</p>
+            <?php } ?>
 
-    <p>
-        Prix :
-        <?php echo $voiture['prix']; ?> DH / Jour
-    </p>
+        </div>
 
-    <a href="car-details.php?id=<?php echo $voiture['id_voiture']; ?>">
-        Voir détails
-    </a>
+    </section>
 
 </div>
 
-<?php } ?>
-
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

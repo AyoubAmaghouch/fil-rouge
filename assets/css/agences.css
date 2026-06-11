@@ -1,0 +1,595 @@
+/* ================================================================
+   AGENCES PAGE — PREMIUM GTA VICE CITY EDITION
+   Design language aligned with index.php + cars.php.
+   All design tokens reused from the existing system.
+   Bootstrap grid (row/col-lg-4) like index.php.
+   ================================================================ */
+
+
+/* ================================================================
+   1. PAGE CONTAINER
+   ================================================================ */
+
+.vc-agences-page {
+    background: #0a0a0f;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    overflow: hidden;
+}
+
+
+/* ================================================================
+   2. AGENCES HERO — PREMIUM IMAGE BANNER
+   Restored hero image with strong dark overlay + GTA Vice City theme.
+   Pink-dominant accents to differentiate from Cars (cyan) and Homepage.
+   ================================================================ */
+
+.vc-agences-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 520px;
+    margin: 0;
+    padding: 100px 0 110px;
+    background:
+        linear-gradient(
+            rgba(6, 2, 14, 0.88) 0%,
+            rgba(10, 4, 20, 0.82) 35%,
+            rgba(8, 4, 16, 0.86) 65%,
+            rgba(10, 10, 15, 0.95) 90%,
+            #0a0a0f 100%
+        ),
+        url('../images/hero/hero.jpg');
+    background-size: cover;
+    background-position: center 60%;
+    overflow: hidden;
+}
+
+/* Subtle diagonal neon texture overlay */
+.vc-agences-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 80px,
+            rgba(255, 110, 199, 0.03) 80px,
+            rgba(255, 110, 199, 0.03) 81px,
+            transparent 81px,
+            transparent 160px
+        ),
+        radial-gradient(ellipse 600px 400px at 30% 40%, rgba(255, 110, 199, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 70% 60%, rgba(0, 245, 255, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Bottom gradient fade into page */
+.vc-agences-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(10, 10, 15, 0.5) 40%,
+        rgba(10, 10, 15, 0.85) 70%,
+        #0a0a0f 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── CONTENT AREA (overrides .vc-section-header) ── */
+
+.vc-agences-banner .vc-section-header {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+}
+
+/* Decorative top accent bar */
+.vc-agences-banner .vc-section-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #FF6EC7, rgba(255, 110, 199, 0.3));
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.5), 0 0 40px rgba(255, 110, 199, 0.2);
+}
+
+/* Tag — pink neon pill */
+.vc-agences-banner .vc-section-tag {
+    border-color: rgba(255, 110, 199, 0.6);
+    background: rgba(255, 110, 199, 0.1);
+    color: #FF6EC7;
+    text-shadow: 0 0 14px rgba(255, 110, 199, 0.5);
+    font-size: 0.88rem;
+    letter-spacing: 5px;
+    padding: 8px 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.1);
+}
+
+/* Title — white with neon pink glow (override gradient text) */
+.vc-agences-banner .vc-section-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    background: none;
+    text-shadow:
+        0 0 20px rgba(255, 110, 199, 0.5),
+        0 0 40px rgba(255, 110, 199, 0.25),
+        0 0 80px rgba(255, 110, 199, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.8);
+    filter: none;
+}
+
+/* Subtitle — warm light gray */
+.vc-agences-banner .vc-section-subtitle {
+    color: #c0b8d0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.8;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    max-width: 500px;
+    margin: 0 auto 24px;
+}
+
+/* Title line — pink neon bar */
+.vc-agences-banner .vc-title-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #FF6EC7, rgba(255, 110, 199, 0.3));
+    box-shadow:
+        0 0 16px rgba(255, 110, 199, 0.6),
+        0 0 32px rgba(255, 110, 199, 0.25);
+}
+
+
+/* ================================================================
+   3. AGENCIES LISTING SECTION
+   ================================================================ */
+
+.vc-agences-listing {
+    padding: 60px 0 0;
+    position: relative;
+}
+
+/* Ambient pink glow — top right */
+.vc-agences-listing::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: -8%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 110, 199, 0.06) 0%, rgba(255, 110, 199, 0.02) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Ambient cyan glow — bottom left */
+.vc-agences-listing::after {
+    content: '';
+    position: absolute;
+    bottom: 5%;
+    left: -8%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.06) 0%, rgba(0, 245, 255, 0.02) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+
+/* ================================================================
+   3a. RESULTS COUNT
+   ================================================================ */
+
+.vc-agences-results {
+    margin-bottom: 36px;
+}
+
+.vc-agences-count {
+    color: #9a9ab2;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, rgba(255, 110, 199, 0.06) 0%, rgba(0, 245, 255, 0.04) 100%);
+    border: 1px solid rgba(255, 110, 199, 0.12);
+    border-radius: 50px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+
+/* ================================================================
+   4. AGENCY CARD LINK WRAPPER
+   Makes the whole card clickable.
+   ================================================================ */
+
+.vc-agency-link-card {
+    text-decoration: none;
+    display: block;
+}
+
+.vc-agency-link-card:hover {
+    /* No transform here — the card itself handles the hover */
+}
+
+
+/* ================================================================
+   5. PREMIUM AGENCY CARD
+   Elevated version of index.css .vc-agency-card.
+   ================================================================ */
+
+.vc-agences-listing .vc-agency-card {
+    background: linear-gradient(165deg, #12122a 0%, #0e0e22 50%, #0c0c1c 100%);
+    border: 1px solid rgba(255, 110, 199, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: vcAgencyReveal 0.6s ease both;
+}
+
+.vc-agences-listing .col-lg-4:nth-child(1) .vc-agency-card { animation-delay: 0.05s; }
+.vc-agences-listing .col-lg-4:nth-child(2) .vc-agency-card { animation-delay: 0.12s; }
+.vc-agences-listing .col-lg-4:nth-child(3) .vc-agency-card { animation-delay: 0.19s; }
+.vc-agences-listing .col-lg-4:nth-child(4) .vc-agency-card { animation-delay: 0.26s; }
+.vc-agences-listing .col-lg-4:nth-child(5) .vc-agency-card { animation-delay: 0.33s; }
+.vc-agences-listing .col-lg-4:nth-child(6) .vc-agency-card { animation-delay: 0.40s; }
+
+@keyframes vcAgencyReveal {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Gradient border mask on hover */
+.vc-agences-listing .vc-agency-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    background: linear-gradient(160deg, rgba(255, 110, 199, 0.25), rgba(0, 245, 255, 0.25)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.vc-agences-listing .vc-agency-card:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 20px 60px rgba(255, 110, 199, 0.14),
+        0 0 40px rgba(0, 245, 255, 0.1),
+        0 0 80px rgba(255, 110, 199, 0.05);
+    border-color: rgba(255, 110, 199, 0.2);
+}
+
+.vc-agences-listing .vc-agency-card:hover::before {
+    opacity: 1;
+}
+
+
+/* ================================================================
+   5a. AGENCY LOGO / IMAGE AREA
+   Taller display with premium overlay.
+   ================================================================ */
+
+.vc-agences-listing .vc-agency-logo-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.vc-agences-listing .vc-agency-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.vc-agences-listing .vc-agency-card:hover .vc-agency-img {
+    transform: scale(1.08);
+}
+
+/* Gradient overlay on logo area */
+.vc-agences-listing .vc-agency-logo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 35%,
+        rgba(10, 10, 15, 0.4) 65%,
+        rgba(10, 10, 15, 0.85) 100%
+    );
+    pointer-events: none;
+}
+
+/* Shine sweep on image hover */
+.vc-agences-listing .vc-agency-logo-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.vc-agences-listing .vc-agency-card:hover .vc-agency-logo-wrap::before {
+    left: 120%;
+}
+
+
+/* ================================================================
+   5b. AGENCY CARD BODY
+   ================================================================ */
+
+.vc-agences-listing .vc-agency-body {
+    padding: 26px 24px 28px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-agences-listing .vc-agency-name {
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    position: relative;
+    padding-bottom: 16px;
+}
+
+/* Neon accent line under name */
+.vc-agences-listing .vc-agency-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #FF6EC7, #00F5FF);
+    transition: width 0.4s ease;
+    box-shadow: 0 0 10px rgba(255, 110, 199, 0.3);
+}
+
+.vc-agences-listing .vc-agency-card:hover .vc-agency-name::after {
+    width: 70px;
+}
+
+
+/* ================================================================
+   5c. AGENCY META INFO
+   ================================================================ */
+
+.vc-agences-listing .vc-agency-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.vc-agences-listing .vc-agency-city,
+.vc-agences-listing .vc-agency-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #9a9ab2;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 8px 14px;
+    transition: all 0.3s ease;
+}
+
+.vc-agences-listing .vc-agency-card:hover .vc-agency-city,
+.vc-agences-listing .vc-agency-card:hover .vc-agency-phone {
+    border-color: rgba(255, 110, 199, 0.15);
+    background: rgba(255, 110, 199, 0.05);
+}
+
+.vc-agences-listing .vc-agency-city i,
+.vc-agences-listing .vc-agency-phone i {
+    color: #FF6EC7;
+    font-size: 0.9rem;
+    filter: drop-shadow(0 0 4px rgba(255, 110, 199, 0.3));
+    flex-shrink: 0;
+}
+
+
+/* ================================================================
+   6. EMPTY STATE
+   ================================================================ */
+
+.vc-agences-empty {
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+/* Ambient glow behind empty icon */
+.vc-agences-empty::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 110, 199, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.vc-agences-empty-icon {
+    font-size: 4.5rem;
+    color: rgba(255, 110, 199, 0.2);
+    display: block;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 15px rgba(255, 110, 199, 0.15));
+    position: relative;
+    z-index: 1;
+}
+
+.vc-agences-empty p {
+    color: #7a7a94;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ================================================================
+   7. RESPONSIVE — TABLET (max-width: 991px)
+   ================================================================ */
+
+@media (max-width: 991px) {
+    .vc-agences-page {
+        padding-bottom: 70px;
+    }
+
+    .vc-agences-banner {
+        min-height: 420px;
+        padding: 80px 16px 90px;
+    }
+
+    .vc-agences-banner .vc-section-title {
+        font-size: 2.4rem;
+    }
+
+    .vc-agences-banner .vc-section-subtitle {
+        font-size: 1rem;
+    }
+
+    .vc-agences-listing {
+        padding-top: 45px;
+    }
+
+    .vc-agences-listing .vc-agency-logo-wrap {
+        height: 190px;
+    }
+}
+
+
+/* ================================================================
+   8. RESPONSIVE — MOBILE (max-width: 576px)
+   ================================================================ */
+
+@media (max-width: 576px) {
+    .vc-agences-page {
+        padding-bottom: 50px;
+    }
+
+    .vc-agences-banner {
+        min-height: 360px;
+        padding: 70px 12px 70px;
+    }
+
+    .vc-agences-banner .vc-section-tag {
+        font-size: 0.72rem;
+        letter-spacing: 3px;
+        padding: 6px 14px;
+        margin-bottom: 16px;
+    }
+
+    .vc-agences-banner .vc-section-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    .vc-agences-banner .vc-section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .vc-agences-listing {
+        padding-top: 35px;
+    }
+
+    .vc-agences-listing .vc-agency-card {
+        border-radius: 16px;
+    }
+
+    .vc-agences-listing .vc-agency-logo-wrap {
+        height: 180px;
+    }
+
+    .vc-agences-listing .vc-agency-body {
+        padding: 20px 18px 22px;
+    }
+
+    .vc-agences-listing .vc-agency-name {
+        font-size: 1.15rem;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+    }
+
+    .vc-agences-listing .vc-agency-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .vc-agences-listing .vc-agency-city,
+    .vc-agences-listing .vc-agency-phone {
+        padding: 7px 12px;
+        font-size: 0.82rem;
+    }
+
+    .vc-agences-empty {
+        padding: 60px 16px;
+    }
+
+    .vc-agences-empty-icon {
+        font-size: 3.5rem;
+    }
+
+    .vc-agences-empty p {
+        font-size: 1.05rem;
+    }
+}
+
+
+/* ================================================================
+   END AGENCES PAGE — PREMIUM GTA VICE CITY EDITION
+   ================================================================ */

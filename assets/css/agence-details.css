@@ -1,0 +1,566 @@
+/* ================================================================
+   AGENCE DETAILS PAGE — GTA VICE CITY STYLE
+   Reuses design tokens from style.css + index.css.
+   Scoped under .vc-ad-page.
+   ================================================================ */
+
+
+/* ================================================================
+   1. PAGE CONTAINER
+   ================================================================ */
+
+.vc-ad-page {
+    background: #0a0a0f;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+
+/* ================================================================
+   2. PAGE BANNER
+   Same hero treatment as other pages
+   ================================================================ */
+
+.vc-ad-banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 320px;
+    margin: 0;
+    padding: 80px 20px 60px;
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.65) 0%,
+            rgba(0, 0, 0, 0.55) 50%,
+            rgba(0, 0, 0, 0.70) 80%,
+            #0a0a0f 100%
+        ),
+        url('../images/hero/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.vc-ad-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(10, 10, 15, 0.6) 50%,
+        #0a0a0f 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.vc-ad-banner h1 {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 10px;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff 0%, #00F5FF 60%, #FF6EC7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.vc-ad-subtitle {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    color: #d6d6d6;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vc-ad-subtitle i {
+    color: #FF6EC7;
+    filter: drop-shadow(0 0 4px rgba(255, 110, 199, 0.4));
+}
+
+
+/* ================================================================
+   3. CONTAINER
+   ================================================================ */
+
+.vc-ad-container {
+    max-width: 1200px;
+    margin-top: 40px;
+}
+
+
+/* ================================================================
+   4. LOGO CARD
+   Same card style as .vc-car-card from index.css
+   ================================================================ */
+
+.vc-ad-logo-card {
+    background: linear-gradient(160deg, #111122 0%, #0d0d1f 100%);
+    border: 1px solid rgba(255, 110, 199, 0.12);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    position: sticky;
+    top: 100px;
+}
+
+.vc-ad-logo-wrap {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #00F5FF;
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.3), 0 0 50px rgba(0, 245, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.vc-ad-logo-card:hover .vc-ad-logo-wrap {
+    border-color: #FF6EC7;
+    box-shadow: 0 0 30px rgba(255, 110, 199, 0.4), 0 0 60px rgba(255, 110, 199, 0.15);
+}
+
+.vc-ad-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.vc-ad-logo-card:hover .vc-ad-logo-img {
+    transform: scale(1.08);
+}
+
+.vc-ad-name {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 24px;
+    letter-spacing: 1px;
+}
+
+
+/* ================================================================
+   5. CONTACT INFO LIST
+   ================================================================ */
+
+.vc-ad-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.vc-ad-contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 14px;
+    background: rgba(0, 245, 255, 0.03);
+    border: 1px solid rgba(0, 245, 255, 0.06);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.vc-ad-contact-row:hover {
+    border-color: rgba(0, 245, 255, 0.15);
+    background: rgba(0, 245, 255, 0.06);
+    transform: translateX(4px);
+}
+
+.vc-ad-contact-row i {
+    color: #FF6EC7;
+    font-size: 1.1rem;
+    margin-top: 3px;
+    filter: drop-shadow(0 0 4px rgba(255, 110, 199, 0.3));
+    flex-shrink: 0;
+}
+
+.vc-ad-contact-row div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.vc-ad-contact-label {
+    color: #8a8aa0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.vc-ad-contact-value {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+/* Google Maps link — same as .vc-car-btn pink style */
+.vc-ad-map-link {
+    color: #00F5FF;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.vc-ad-map-link:hover {
+    color: #FF6EC7;
+    text-shadow: 0 0 10px rgba(255, 110, 199, 0.3);
+}
+
+
+/* ================================================================
+   6. SECTION TITLE
+   Same gradient text as .vc-section-title from index.css
+   ================================================================ */
+
+.vc-ad-section-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0 0 28px;
+    background: linear-gradient(90deg, #ffffff 0%, #00F5FF 60%, #FF6EC7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.vc-ad-count {
+    font-size: 1rem;
+    font-weight: 600;
+    -webkit-text-fill-color: #8a8aa0;
+}
+
+
+/* ================================================================
+   7. CARS GRID
+   Same grid philosophy as .vc-cars-grid from cars.css
+   ================================================================ */
+
+.vc-ad-cars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+
+/* ================================================================
+   8. CAR CARD
+   Exact same card style as .vc-car-card from index.css / cars.css
+   ================================================================ */
+
+.vc-ad-car-card {
+    background: linear-gradient(160deg, #111122 0%, #0d0d1f 100%);
+    border: 1px solid rgba(0, 245, 255, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    animation: vcAdCardIn 0.5s ease both;
+}
+
+.vc-ad-car-card:nth-child(1) { animation-delay: 0.05s; }
+.vc-ad-car-card:nth-child(2) { animation-delay: 0.1s; }
+.vc-ad-car-card:nth-child(3) { animation-delay: 0.15s; }
+.vc-ad-car-card:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes vcAdCardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Same hover as .vc-car-card */
+.vc-ad-car-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 245, 255, 0.12), 0 0 30px rgba(255, 110, 199, 0.08);
+}
+
+/* Same gradient border glow */
+.vc-ad-car-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    background: linear-gradient(160deg, rgba(0, 245, 255, 0.2), rgba(255, 110, 199, 0.2)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.vc-ad-car-card:hover::before {
+    opacity: 1;
+}
+
+/* Image */
+.vc-ad-car-img-wrap {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.vc-ad-car-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.vc-ad-car-card:hover .vc-ad-car-img {
+    transform: scale(1.08);
+}
+
+/* Badges */
+.vc-ad-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    backdrop-filter: blur(6px);
+    z-index: 2;
+}
+
+.vc-ad-badge-dispo {
+    background: rgba(0, 230, 118, 0.15);
+    color: #00E676;
+    border: 1px solid rgba(0, 230, 118, 0.4);
+}
+
+.vc-ad-badge-indispo {
+    background: rgba(255, 82, 82, 0.15);
+    color: #FF5252;
+    border: 1px solid rgba(255, 82, 82, 0.4);
+}
+
+/* Card Body */
+.vc-ad-car-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-ad-car-brand {
+    color: #FF6EC7;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.vc-ad-car-model {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+}
+
+.vc-ad-car-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.vc-ad-car-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #8a8aa0;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.vc-ad-car-meta i {
+    color: #00F5FF;
+    font-size: 0.85rem;
+}
+
+/* Card Footer */
+.vc-ad-car-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.vc-ad-car-price {
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-ad-price-value {
+    color: #00F5FF;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+}
+
+.vc-ad-price-unit {
+    color: #6b6b80;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+/* Voir détails button — same as .vc-car-btn */
+.vc-ad-car-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(255, 110, 199, 0.12) 0%, rgba(255, 110, 199, 0.05) 100%);
+    color: #FF6EC7;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 110, 199, 0.3);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.vc-ad-car-btn:hover {
+    background: #FF6EC7;
+    color: #0a0a0f;
+    box-shadow: 0 4px 20px rgba(255, 110, 199, 0.5);
+    transform: translateY(-2px);
+}
+
+
+/* ================================================================
+   9. EMPTY STATE
+   ================================================================ */
+
+.vc-ad-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(160deg, #111122 0%, #0d0d1f 100%);
+    border: 1px solid rgba(0, 245, 255, 0.08);
+    border-radius: 16px;
+}
+
+.vc-ad-empty p {
+    color: #6b6b80;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+
+/* ================================================================
+   10. RESPONSIVE — TABLET (≤991px)
+   ================================================================ */
+
+@media (max-width: 991px) {
+    .vc-ad-page {
+        padding-bottom: 60px;
+    }
+
+    .vc-ad-banner {
+        min-height: 240px;
+    }
+
+    .vc-ad-banner h1 {
+        font-size: 2rem;
+    }
+
+    .vc-ad-logo-card {
+        position: static;
+        margin-bottom: 30px;
+    }
+
+    .vc-ad-cars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+
+/* ================================================================
+   11. RESPONSIVE — MOBILE (≤576px)
+   ================================================================ */
+
+@media (max-width: 576px) {
+    .vc-ad-page {
+        padding-bottom: 50px;
+    }
+
+    .vc-ad-banner {
+        min-height: 200px;
+        padding: 60px 16px 40px;
+    }
+
+    .vc-ad-banner h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .vc-ad-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .vc-ad-logo-wrap {
+        width: 100px;
+        height: 100px;
+    }
+
+    .vc-ad-section-title {
+        font-size: 1.4rem;
+    }
+
+    .vc-ad-cars-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .vc-ad-car-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .vc-ad-car-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* ================================================================
+   END AGENCE DETAILS PAGE
+   ================================================================ */

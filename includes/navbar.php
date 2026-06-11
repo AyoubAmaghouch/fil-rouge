@@ -45,11 +45,19 @@
 
             <!-- Right Side: Auth -->
             <div class="vc-auth">
-                <?php if(isset($_SESSION['id_agence'])) { ?>
+                <?php if(isset($_SESSION['id_agence'])) {
+                    /* Fetch logo from DB since session only stores id + name */
+                    $_vc_logo = '';
+                    if(isset($pdo)) {
+                        $_vc_stmt = $pdo->prepare("SELECT logo FROM agences WHERE id_agence = ?");
+                        $_vc_stmt->execute([$_SESSION['id_agence']]);
+                        $_vc_logo = $_vc_stmt->fetchColumn();
+                    }
+                ?>
 
                     <a href="agency/dashboard.php" class="vc-agency-link" title="Dashboard">
                         <img
-                            src="assets/images/agences/<?php echo $_SESSION['logo_agence']; ?>"
+                            src="assets/images/agences/<?php echo htmlspecialchars($_vc_logo ?: 'default.jpg'); ?>"
                             alt="Logo Agence"
                             class="vc-agency-logo"
                         >

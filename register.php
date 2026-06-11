@@ -1,45 +1,109 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Inscription Agence</title>
-</head>
-<body>
+<?php
+$page_css = "assets/css/register.css";
+?>
 
-    <h2>Inscription Agence</h2>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/navbar.php'; ?>
 
-    <form action="../crud/add_agence.php" method="POST" enctype="multipart/form-data">
+<div class="vc-register-page">
 
-        <label>Nom Agence :</label><br>
-        <input type="text" name="nom_agence" required><br><br>
+    <div class="vc-register-container">
 
-        <label>Email :</label><br>
-        <input type="email" name="email" required><br><br>
+        <!-- ===== DECORATIVE GLOW ===== -->
 
-        <label>Téléphone :</label><br>
-        <input type="text" name="telephone" required><br><br>
+        <div class="vc-register-glow"></div>
 
-        <label>WhatsApp :</label><br>
-        <input type="text" name="whatsapp" placeholder="212612345678" required><br><br>
+        <!-- ===== REGISTER CARD ===== -->
 
-        <label>Ville :</label><br>
-        <input type="text" name="ville" required><br><br>
+        <div class="vc-register-card">
 
-        <label>Lien Google Maps :</label><br>
-        <input type="url" name="localisation"
-        placeholder="https://maps.google.com/?q=..." required><br><br>
+            <div class="vc-register-header">
+                <h2>Inscription Agence</h2>
+                <p>Rejoignez la plateforme VICITY CAR</p>
+            </div>
 
-        <label>Mot de passe :</label><br>
-        <input type="password" name="mot_de_passe" required><br><br>
+            <form action="crud/add_agence.php" method="POST" enctype="multipart/form-data" class="vc-register-form">
 
-        <label>Logo :</label><br>
-        <input type="file" name="logo" required><br><br>
+                <div class="vc-form-row">
+                    <div class="vc-form-group">
+                        <label for="nom_agence">
+                            <i class="bi bi-building"></i> Nom Agence
+                        </label>
+                        <input type="text" id="nom_agence" name="nom_agence" placeholder="Nom de votre agence" required>
+                    </div>
+                </div>
 
-        <button type="submit">
-            S'inscrire
-        </button>
+                <div class="vc-form-row vc-form-row-2col">
+                    <div class="vc-form-group">
+                        <label for="email">
+                            <i class="bi bi-envelope-fill"></i> Email
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                    </div>
 
-    </form>
+                    <div class="vc-form-group">
+                        <label for="telephone">
+                            <i class="bi bi-telephone-fill"></i> Téléphone
+                        </label>
+                        <input type="text" id="telephone" name="telephone" placeholder="0600000000" required>
+                    </div>
+                </div>
 
-</body>
-</html>
+                <div class="vc-form-row vc-form-row-2col">
+                    <div class="vc-form-group">
+                        <label for="whatsapp">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </label>
+                        <input type="text" id="whatsapp" name="whatsapp" placeholder="212612345678" required>
+                    </div>
+
+                    <div class="vc-form-group">
+                        <label for="ville">
+                            <i class="bi bi-geo-alt-fill"></i> Ville
+                        </label>
+                        <input type="text" id="ville" name="ville" placeholder="Casablanca" required>
+                    </div>
+                </div>
+
+                <div class="vc-form-group">
+                    <label for="localisation">
+                        <i class="bi bi-pin-map-fill"></i> Lien Google Maps
+                    </label>
+                    <input type="url" id="localisation" name="localisation" placeholder="https://maps.google.com/?q=..." required>
+                </div>
+
+                <div class="vc-form-group">
+                    <label for="mot_de_passe">
+                        <i class="bi bi-lock-fill"></i> Mot de passe
+                    </label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="••••••••" required>
+                </div>
+
+                <div class="vc-form-group">
+                    <label for="logo">
+                        <i class="bi bi-image"></i> Logo de l'agence
+                    </label>
+                    <input type="file" id="logo" name="logo" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="vc-register-btn">
+                    <i class="bi bi-person-plus-fill"></i>
+                    S'inscrire
+                </button>
+
+            </form>
+
+            <div class="vc-register-footer">
+                <p>
+                    Déjà inscrit ?
+                    <a href="login.php">Se connecter</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<?php include 'includes/footer.php'; ?>

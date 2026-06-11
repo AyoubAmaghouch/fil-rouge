@@ -15,9 +15,18 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Ajouter une voiture</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ajouter une Voiture — VICITY CAR</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/backend.css">
     </head>
     <body>
+
+    <nav class="vc-back-nav">
+        <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
+        <a href="../index.php">🏠 Accueil</a>
+    </nav>
 
     <h1>Ajouter une voiture</h1>
 
