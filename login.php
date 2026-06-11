@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Connexion Agence</title>
 </head>
+<?php
+$page_css = "assets/css/auth.css";
+?>
+
+<?php include 'includes/header.php'; ?>
 <body>
 
     <h2>Connexion Agence</h2>

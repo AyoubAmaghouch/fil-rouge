@@ -1,69 +1,545 @@
-/* ===== NAVBAR ===== */
+/* ===== GLOBAL ===== */
 
-.custom-navbar{
-    background:#070b11;
-    padding:20px 0;
-    border-bottom:2px solid rgba(0,245,255,0.35);
-    box-shadow:0 0 20px rgba(0,245,255,0.15);
-}
-
-.logo{
-    color:#00F5FF !important;
-    font-size:2rem;
-    font-weight:700;
-    text-decoration:none;
-    font-family:'Poppins',sans-serif;
-}
-.nav-link{
-    color:#d9d9d9 !important;
-    font-size:1.1rem;
-    font-weight:600;
-    margin:0 18px;
-    font-family:'Poppins',sans-serif;
-    position:relative;
+body {
+    background: #0a0a0f;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-link::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:0;
-    height:3px;
-    background:#ffb6d9;
-    transition:0.3s;
+/* ========================================
+   NAVBAR - GTA VICE CITY STYLE
+   ======================================== */
+
+.vc-navbar {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1f 100%);
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid rgba(0, 245, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 245, 255, 0.15), 0 0 60px rgba(255, 110, 199, 0.08);
+    backdrop-filter: blur(10px);
 }
 
-.nav-link:hover::after{
-    width:100%;
+/* ===== LOGO ===== */
+
+.vc-logo {
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover{
-    color:#ffb6d9 !important;
+.vc-logo:hover {
+    transform: scale(1.05);
 }
 
-.register-btn{
-    background:#00F5FF;
-    color:#000 !important;
-    border-radius:40px;
-    padding:10px 35px;
-    font-weight:700;
-    text-decoration:none;
-}
-.register-btn:hover{
-    background:#ffffff;
-    transform:translateY(-2px);
-}
-
-.navbar-toggler{
-    border:1px solid #00F5FF;
-}
-.active{
-    color:#ffb6d9 !important;
+.vc-logo-text {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00F5FF 0%, #FF6EC7 50%, #00F5FF 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+    text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
 }
 
-.active::after{
-    width:100%;
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
 }
 
-/* ===== FIN NAVBAR ===== */
+/* ===== NAVIGATION LINKS ===== */
+
+.vc-nav {
+    gap: 8px;
+}
+
+.vc-link {
+    color: #e0e0e0 !important;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 10px 20px !important;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vc-dot {
+    width: 6px;
+    height: 6px;
+    background: #00F5FF;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00F5FF;
+    transition: all 0.3s ease;
+}
+
+.vc-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #FF6EC7, transparent);
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.vc-link:hover {
+    color: #FF6EC7 !important;
+    background: rgba(255, 110, 199, 0.08);
+}
+
+.vc-link:hover::before {
+    width: 80%;
+}
+
+.vc-link:hover .vc-dot {
+    background: #FF6EC7;
+    box-shadow: 0 0 15px #FF6EC7;
+    transform: scale(1.3);
+}
+
+.vc-link.active {
+    color: #00F5FF !important;
+    background: rgba(0, 245, 255, 0.1);
+}
+
+.vc-link.active .vc-dot {
+    background: #00F5FF;
+    box-shadow: 0 0 15px #00F5FF;
+    width: 8px;
+    height: 8px;
+}
+
+.vc-link.active::before {
+    width: 80%;
+    background: linear-gradient(90deg, transparent, #00F5FF, transparent);
+}
+
+/* ===== AUTH SECTION ===== */
+
+.vc-auth {
+    display: flex;
+    align-items: center;
+}
+
+.vc-agency-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.vc-agency-logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00F5FF;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 40px rgba(0, 245, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.vc-agency-link:hover .vc-agency-logo {
+    border-color: #FF6EC7;
+    box-shadow: 0 0 25px rgba(255, 110, 199, 0.6), 0 0 50px rgba(255, 110, 199, 0.3);
+    transform: scale(1.08);
+}
+
+.vc-connexion-btn {
+    background: linear-gradient(135deg, #00F5FF 0%, #00d4e0 100%);
+    color: #0a0a0f !important;
+    padding: 12px 36px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 245, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.vc-connexion-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.vc-connexion-btn:hover {
+    background: linear-gradient(135deg, #FF6EC7 0%, #ff5cb8 100%);
+    color: #fff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(255, 110, 199, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.vc-connexion-btn:hover::before {
+    left: 100%;
+}
+
+/* ===== MOBILE TOGGLER ===== */
+
+.vc-toggler {
+    border: 2px solid #00F5FF;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.vc-toggler:hover {
+    border-color: #FF6EC7;
+    box-shadow: 0 0 15px rgba(255, 110, 199, 0.5);
+}
+
+.vc-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 991px) {
+    .vc-navbar {
+        padding: 15px 0;
+    }
+
+    .vc-logo-text {
+        font-size: 1.6rem;
+    }
+
+    .vc-nav {
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(10, 10, 15, 0.95);
+        border-radius: 12px;
+        border: 1px solid rgba(0, 245, 255, 0.2);
+    }
+
+    .vc-link {
+        padding: 14px 20px !important;
+        margin-bottom: 8px;
+    }
+
+    .vc-auth {
+        margin-top: 20px;
+        padding: 20px;
+        justify-content: center;
+        background: rgba(10, 10, 15, 0.95);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 110, 199, 0.2);
+    }
+
+    .vc-connexion-btn {
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+    }
+
+    .vc-agency-logo {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 576px) {
+    .vc-logo-text {
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+    }
+
+    .vc-link {
+        font-size: 1rem;
+    }
+
+    .vc-connexion-btn {
+        font-size: 0.95rem;
+        padding: 14px;
+    }
+}
+
+/* ========================================
+   END NAVBAR
+   ======================================== */
+
+
+/* ========================================
+   FOOTER — GTA VICE CITY
+   ======================================== */
+
+.vc-footer {
+    position: relative;
+    padding: 80px 0 0;
+    overflow: hidden;
+    background:
+        url('../images/footer/footer.jpg') center center / cover no-repeat fixed;
+}
+
+/* Dark overlay to keep text readable */
+.vc-footer-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 5, 10, 0.93) 0%,
+            rgba(8, 5, 15, 0.90) 40%,
+            rgba(5, 5, 10, 0.95) 100%
+        );
+    z-index: 1;
+}
+
+/* Neon top line */
+.vc-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 5%, #00F5FF 30%, #FF6EC7 70%, transparent 95%);
+    z-index: 3;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.4), 0 0 40px rgba(255, 110, 199, 0.2);
+}
+
+/* Ambient glows */
+.vc-footer::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: -5%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ===== BRAND ===== */
+
+.vc-footer-brand {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00F5FF 0%, #FF6EC7 50%, #00F5FF 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.vc-footer-desc {
+    color: rgba(180, 180, 200, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    max-width: 320px;
+    margin-bottom: 20px;
+}
+
+/* ===== SOCIAL LINKS ===== */
+
+.vc-footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.vc-social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    color: #00F5FF;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.vc-social-link:hover {
+    background: #00F5FF;
+    color: #0a0a0f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 245, 255, 0.4);
+}
+
+/* ===== COLUMN TITLES ===== */
+
+.vc-footer-title {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.vc-footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #00F5FF, #FF6EC7);
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+}
+
+/* ===== LINKS ===== */
+
+.vc-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vc-footer-links li {
+    margin-bottom: 12px;
+}
+
+.vc-footer-links a {
+    color: rgba(180, 180, 200, 0.65);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vc-footer-links a i {
+    font-size: 0.65rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.3s ease;
+    color: #FF6EC7;
+}
+
+.vc-footer-links a:hover {
+    color: #00F5FF;
+    transform: translateX(6px);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.vc-footer-links a:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===== CONTACT ===== */
+
+.vc-footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: rgba(180, 180, 200, 0.65);
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+}
+
+.vc-footer-contact li i {
+    color: #FF6EC7;
+    font-size: 1rem;
+    margin-top: 2px;
+    filter: drop-shadow(0 0 4px rgba(255, 110, 199, 0.3));
+    flex-shrink: 0;
+}
+
+/* ===== BOTTOM BAR ===== */
+
+.vc-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 50px;
+    padding: 22px 0;
+    text-align: center;
+}
+
+.vc-footer-copy {
+    color: rgba(120, 120, 140, 0.5);
+    font-size: 0.8rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.vc-footer-copy span {
+    background: linear-gradient(90deg, #00F5FF, #FF6EC7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* ===== FOOTER RESPONSIVE ===== */
+
+@media (max-width: 991px) {
+    .vc-footer {
+        padding: 50px 0 0;
+        background-attachment: scroll;
+    }
+
+    .vc-footer-brand {
+        font-size: 1.6rem;
+    }
+
+    .vc-footer-desc {
+        max-width: 100%;
+    }
+
+    .vc-footer-bottom {
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 576px) {
+    .vc-footer {
+        padding: 40px 0 0;
+    }
+
+    .vc-footer-brand {
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+    }
+
+    .vc-footer-title {
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+    }
+
+    .vc-social-link {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .vc-footer-bottom {
+        margin-top: 25px;
+        padding: 16px 0;
+    }
+}
+
+/* ========================================
+   END FOOTER
+   ======================================== */

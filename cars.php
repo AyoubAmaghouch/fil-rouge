@@ -2,6 +2,15 @@
 
 require_once 'config/db.php';
 
+/* Filtres */
+
+$marque = $_GET['marque'] ?? '';
+$transmission = $_GET['transmission'] ?? '';
+$carburant = $_GET['carburant'] ?? '';
+$ville = $_GET['ville'] ?? '';
+
+/* Requête principale */
+
 $sql = "SELECT voitures.*,
                marques.nom_marque,
                agences.nom_agence,
@@ -20,11 +29,79 @@ $sql = "SELECT voitures.*,
         ON voitures.id_voiture = images_voitures.id_voiture
 
         WHERE agences.statut_validation = 1
-        AND voitures.disponibilite = 1";
+";
+$params = [];
 
-$stmt = $pdo->query($sql);
+/* Filtre Marque */
+
+if (!empty($marque)) {
+
+    $sql .= " AND marques.nom_marque = ?";
+    $params[] = $marque;
+}
+
+/* Filtre Transmission */
+
+if (!empty($transmission)) {
+
+    $sql .= " AND voitures.transmission = ?";
+    $params[] = $transmission;
+}
+
+/* Filtre Carburant */
+
+if (!empty($carburant)) {
+
+    $sql .= " AND voitures.carburant = ?";
+    $params[] = $carburant;
+}
+
+/* Filtre Ville */
+
+if (!empty($ville)) {
+
+    $sql .= " AND agences.ville = ?";
+    $params[] = $ville;
+}
+
+/* Exécution */
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 
 $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/* Marques */
+
+$marques = $pdo->query("
+    SELECT *
+    FROM marques
+    ORDER BY nom_marque ASC
+");
+
+/* Transmissions */
+
+$transmissions = $pdo->query("
+    SELECT DISTINCT transmission
+    FROM voitures
+    ORDER BY transmission ASC
+");
+
+/* Carburants */
+
+$carburants = $pdo->query("
+    SELECT DISTINCT carburant
+    FROM voitures
+    ORDER BY carburant ASC
+");
+
+/* Villes */
+
+$villes = $pdo->query("
+    SELECT DISTINCT ville
+    FROM agences
+    ORDER BY ville ASC
+");
 
 ?>
 
@@ -37,6 +114,88 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <h1>Nos Voitures</h1>
+
+<form method="GET">
+
+    <select name="marque">
+
+        <option value="">Toutes les marques</option>
+
+        <?php while($m = $marques->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <option
+                value="<?php echo $m['nom_marque']; ?>"
+                <?php if($marque == $m['nom_marque']) echo "selected"; ?>
+            >
+                <?php echo $m['nom_marque']; ?>
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <select name="transmission">
+
+        <option value="">Toutes les transmissions</option>
+
+        <?php while($t = $transmissions->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <option
+                value="<?php echo $t['transmission']; ?>"
+                <?php if($transmission == $t['transmission']) echo "selected"; ?>
+            >
+                <?php echo $t['transmission']; ?>
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <select name="carburant">
+
+        <option value="">Tous les carburants</option>
+
+        <?php while($c = $carburants->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <option
+                value="<?php echo $c['carburant']; ?>"
+                <?php if($carburant == $c['carburant']) echo "selected"; ?>
+            >
+                <?php echo $c['carburant']; ?>
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <select name="ville">
+
+        <option value="">Toutes les villes</option>
+
+        <?php while($v = $villes->fetch(PDO::FETCH_ASSOC)) { ?>
+
+            <option
+                value="<?php echo $v['ville']; ?>"
+                <?php if($ville == $v['ville']) echo "selected"; ?>
+            >
+                <?php echo $v['ville']; ?>
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <button type="submit">
+        Filtrer
+    </button>
+
+    <a href="cars.php">
+        Réinitialiser
+    </a>
+
+</form>
+
+<br>
 
 <?php foreach($voitures as $voiture) { ?>
 
@@ -55,6 +214,34 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
         Ville :
         <?php echo $voiture['ville']; ?>
     </p>
+
+    <p>
+        Carburant :
+        <?php echo $voiture['carburant']; ?>
+    </p>
+
+    <p>
+        Transmission :
+        <?php echo $voiture['transmission']; ?>
+    </p>
+    <p>
+    Disponibilité :
+
+    <?php if($voiture['disponibilite'] == 1) { ?>
+
+        <span style="color:green;">
+            Disponible
+        </span>
+
+    <?php } else { ?>
+
+        <span style="color:red;">
+            Indisponible
+        </span>
+
+    <?php } ?>
+
+</p>
 
     <p>
         Prix :

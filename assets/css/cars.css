@@ -1,0 +1,816 @@
+/* ========================================
+   CARS PAGE — GTA VICE CITY STYLE
+   Dedicated stylesheet for cars.php
+   ======================================== */
+
+
+/* ========================================
+   PAGE BANNER
+   ======================================== */
+
+.vc-cars-banner {
+    position: relative;
+    min-height: 45vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(10, 10, 15, 0.55) 0%,
+            rgba(10, 10, 15, 0.75) 60%,
+            #0a0a0f 100%
+        ),
+        url('../images/hero/hero.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.vc-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 245, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(255, 110, 199, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.vc-banner-content {
+    padding: 80px 0 50px;
+}
+
+.vc-banner-title {
+    color: #fff;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #ffffff 0%, #00F5FF 50%, #FF6EC7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.vc-banner-subtitle {
+    color: #9a9ab0;
+    font-size: 1.1rem;
+    max-width: 550px;
+    margin: 0 auto 25px;
+    line-height: 1.6;
+}
+
+.vc-banner-count {
+    margin-top: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    background: rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 60px;
+    backdrop-filter: blur(8px);
+}
+
+.vc-count-num {
+    color: #00F5FF;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+}
+
+.vc-count-label {
+    color: #9a9ab0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   SECTION HEADER (page-specific)
+   ======================================== */
+
+.vc-section-tag {
+    display: inline-block;
+    color: #00F5FF;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding: 6px 18px;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 50px;
+    background: rgba(0, 245, 255, 0.05);
+}
+
+.vc-title-line {
+    width: 80px;
+    height: 4px;
+    margin: 0 auto;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #00F5FF, #FF6EC7);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+}
+
+
+/* ========================================
+   FILTER SECTION
+   Filter options loaded dynamically from DB.
+   IDs: filter-marque, filter-carburant,
+        filter-transmission, filter-prix,
+        filter-reset, results-count, no-results
+   ======================================== */
+
+.vc-filters-section {
+    background: #0a0a0f;
+    padding: 40px 0 0;
+    position: relative;
+    z-index: 10;
+}
+
+.vc-filters-bar {
+    background: linear-gradient(160deg, rgba(17, 17, 34, 0.8) 0%, rgba(13, 13, 31, 0.8) 100%);
+    border: 1px solid rgba(0, 245, 255, 0.12);
+    border-radius: 16px;
+    padding: 28px 30px 24px;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+/* Neon top accent line */
+.vc-filters-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.4), rgba(255, 110, 199, 0.4), transparent);
+    border-radius: 2px;
+}
+
+/* Filters header */
+.vc-filters-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.vc-filters-header i {
+    color: #00F5FF;
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.4));
+}
+
+.vc-filters-header span {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Filters 4-column grid */
+.vc-filters-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* Filter group (label + select) */
+.vc-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.vc-filter-label {
+    color: #7a7a90;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Custom select dropdown */
+.vc-filter-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background:
+        rgba(10, 10, 15, 0.8)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300F5FF' d='M6 8.825L1.175 4 2.238 2.938 6 6.7 9.763 2.937 10.825 4z'/%3E%3C/svg%3E")
+        no-repeat right 14px center;
+    color: #e0e0e0;
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid rgba(0, 245, 255, 0.15);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.vc-filter-select:hover {
+    border-color: rgba(0, 245, 255, 0.35);
+    background-color: rgba(10, 10, 15, 0.95);
+}
+
+.vc-filter-select:focus {
+    border-color: #00F5FF;
+    box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.1), 0 0 15px rgba(0, 245, 255, 0.08);
+}
+
+.vc-filter-select option {
+    background: #111122;
+    color: #e0e0e0;
+    padding: 10px;
+}
+
+/* Reset button */
+.vc-filter-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 110, 199, 0.08);
+    color: #FF6EC7;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border: 1px solid rgba(255, 110, 199, 0.25);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.vc-filter-reset:hover {
+    background: rgba(255, 110, 199, 0.18);
+    border-color: #FF6EC7;
+    box-shadow: 0 0 15px rgba(255, 110, 199, 0.2);
+    transform: translateY(-2px);
+}
+
+.vc-filter-reset i {
+    font-size: 0.95rem;
+}
+
+/* Results counter */
+.vc-filters-count {
+    padding: 14px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#results-count {
+    color: #00F5FF;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.vc-filters-count-label {
+    color: #6b6b80;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Card column visibility toggle (for JS filtering) */
+.vc-car-col {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.vc-car-col.vc-hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    position: absolute;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* No Results message (shown by JS when filters match nothing) */
+.vc-no-results {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.vc-no-results i {
+    font-size: 3.5rem;
+    color: rgba(255, 110, 199, 0.2);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.vc-no-results h4 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.vc-no-results p {
+    color: #7a7a90;
+    font-size: 0.95rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   CARS LISTING SECTION
+   ======================================== */
+
+.vc-cars-listing {
+    background: linear-gradient(180deg, #0a0a0f 0%, #0d0d1a 50%, #0a0a0f 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+/* Decorative glows */
+.vc-cars-listing::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.vc-cars-listing::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 110, 199, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   CAR CARD
+   ======================================== */
+
+.vc-car-card {
+    background: linear-gradient(160deg, #111122 0%, #0d0d1f 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 245, 255, 0.12);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Gradient border on hover */
+.vc-car-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    background: linear-gradient(160deg, rgba(0, 245, 255, 0.2), rgba(255, 110, 199, 0.2)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.vc-car-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 245, 255, 0.12), 0 0 30px rgba(255, 110, 199, 0.08);
+}
+
+.vc-car-card:hover::before {
+    opacity: 1;
+}
+
+
+/* ========================================
+   CARD IMAGE
+   ======================================== */
+
+.vc-car-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.vc-car-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.vc-car-card:hover .vc-car-img {
+    transform: scale(1.08);
+}
+
+.vc-car-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 15, 0.85) 100%);
+    pointer-events: none;
+}
+
+.vc-car-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 245, 255, 0.15);
+    color: #00F5FF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 245, 255, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 2;
+}
+
+
+/* ========================================
+   CAR SPECS ROW (Fuel + Transmission)
+   ======================================== */
+
+.vc-car-specs {
+    display: flex;
+    gap: 6px;
+    padding: 12px 22px;
+    background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.vc-spec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #9a9ab0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    background: rgba(0, 245, 255, 0.05);
+    border: 1px solid rgba(0, 245, 255, 0.1);
+    border-radius: 50px;
+}
+
+.vc-spec i {
+    color: #00F5FF;
+    font-size: 0.8rem;
+    filter: drop-shadow(0 0 3px rgba(0, 245, 255, 0.3));
+}
+
+
+/* ========================================
+   CARD BODY
+   ======================================== */
+
+.vc-car-body {
+    padding: 22px 22px 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-car-brand {
+    color: #FF6EC7;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.vc-car-model {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Agency info */
+.vc-car-agency {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #7a7a90;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.vc-car-agency i {
+    color: #FF6EC7;
+    font-size: 0.9rem;
+    filter: drop-shadow(0 0 3px rgba(255, 110, 199, 0.3));
+}
+
+.vc-agency-city {
+    color: #5a5a70;
+    margin-left: 2px;
+}
+
+.vc-agency-city::before {
+    content: '·';
+    margin-right: 6px;
+    color: #3a3a50;
+}
+
+
+/* ========================================
+   CARD FOOTER (Price + Button)
+   ======================================== */
+
+.vc-car-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Price */
+.vc-car-price {
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-price-value {
+    color: #00F5FF;
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+}
+
+.vc-price-unit {
+    color: #6b6b80;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+/* Voir détails button */
+.vc-car-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(255, 110, 199, 0.12) 0%, rgba(255, 110, 199, 0.05) 100%);
+    color: #FF6EC7;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 110, 199, 0.3);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.vc-car-btn:hover {
+    background: #FF6EC7;
+    color: #0a0a0f;
+    box-shadow: 0 4px 20px rgba(255, 110, 199, 0.5);
+    transform: translateY(-2px);
+}
+
+.vc-btn-arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.vc-car-btn:hover .vc-btn-arrow {
+    transform: translateX(4px);
+}
+
+
+/* ========================================
+   EMPTY STATE (no cars available)
+   ======================================== */
+
+.vc-empty-state {
+    padding: 100px 20px;
+}
+
+.vc-empty-state i {
+    font-size: 5rem;
+    color: rgba(0, 245, 255, 0.15);
+    margin-bottom: 25px;
+    display: block;
+}
+
+.vc-empty-state h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.vc-empty-state p {
+    color: #7a7a90;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Back to home button */
+.vc-view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: #00F5FF;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 50px;
+    border: 2px solid #00F5FF;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vc-view-all-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #00F5FF;
+    transform: translateX(-101%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+}
+
+.vc-view-all-btn:hover {
+    color: #0a0a0f;
+    box-shadow: 0 6px 30px rgba(0, 245, 255, 0.5);
+}
+
+.vc-view-all-btn:hover::before {
+    transform: translateX(0);
+}
+
+.vc-view-all-btn:hover .vc-btn-arrow {
+    transform: translateX(5px);
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .vc-cars-banner {
+        min-height: 35vh;
+    }
+
+    .vc-banner-title {
+        font-size: 2.5rem;
+    }
+
+    .vc-banner-subtitle {
+        font-size: 1rem;
+    }
+
+    .vc-cars-listing {
+        padding: 50px 0;
+    }
+
+    .vc-car-img-wrap {
+        height: 200px;
+    }
+
+    /* Filters tablet */
+    .vc-filters-bar {
+        padding: 22px 20px 20px;
+    }
+
+    .vc-filters-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .vc-cars-banner {
+        min-height: 30vh;
+    }
+
+    .vc-banner-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+
+    .vc-banner-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .vc-banner-count {
+        padding: 10px 20px;
+    }
+
+    .vc-count-num {
+        font-size: 1.2rem;
+    }
+
+    .vc-count-label {
+        font-size: 0.75rem;
+    }
+
+    .vc-cars-listing {
+        padding: 40px 0;
+    }
+
+    .vc-car-specs {
+        flex-wrap: wrap;
+        padding: 10px 16px;
+    }
+
+    .vc-car-body {
+        padding: 18px 16px 20px;
+    }
+
+    .vc-car-model {
+        font-size: 1.1rem;
+    }
+
+    .vc-car-footer {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+    .vc-car-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .vc-empty-state {
+        padding: 60px 15px;
+    }
+
+    .vc-empty-state i {
+        font-size: 3.5rem;
+    }
+
+    /* Filters mobile */
+    .vc-filters-section {
+        padding: 25px 0 0;
+    }
+
+    .vc-filters-bar {
+        padding: 18px 16px 16px;
+    }
+
+    .vc-filters-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .vc-filter-select {
+        font-size: 0.85rem;
+        padding: 11px 36px 11px 14px;
+    }
+
+    .vc-filter-reset {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+}
+
+/* ========================================
+   END CARS PAGE
+   ======================================== */

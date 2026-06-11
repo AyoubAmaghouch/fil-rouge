@@ -96,7 +96,21 @@ width="400">
     <strong>Téléphone :</strong>
     <?php echo $voiture['telephone']; ?>
 </p>
+<?php if($voiture['disponibilite'] == 1) { ?>
 
+    <p>
+        <strong>Disponibilité :</strong>
+        Disponible
+    </p>
+
+<?php } else { ?>
+
+    <p>
+        <strong>Disponibilité :</strong>
+        Indisponible
+    </p>
+
+<?php } ?>
 <a href="cars.php">
     Retour aux voitures
 </a>
