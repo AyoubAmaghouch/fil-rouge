@@ -48,7 +48,9 @@
 
                 } else {
 
-                    echo "Votre agence est en attente de validation.";
+                    $_SESSION['flash_message'] = "Votre agence est en attente de validation par l'administrateur.";
+                    header("Location: ../login.php");
+                    exit();
                 }
 
             } else {

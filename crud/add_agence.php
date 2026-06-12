@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once '../config/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,6 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $logo
     ]);
 
-    echo "Agence enregistrée avec succès !";
+    $_SESSION['flash_message'] = "Votre demande a été envoyée avec succès. Veuillez attendre la validation de l'administrateur.";
+    header("Location: ../register.php");
+    exit();
 }
 ?>

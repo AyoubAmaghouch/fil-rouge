@@ -41,17 +41,39 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Voitures — VICITY CAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/backend.css">
+    <link rel="stylesheet" href="../assets/css/admin-voitures.css">
 </head>
-<body>
+<body class="admin-voitures">
 
-<nav class="vc-back-nav">
-    <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
-    <a href="../index.php">🏠 Accueil</a>
-</nav>
+<!-- Sidebar -->
+<aside class="admin-sidebar">
+    <div class="sidebar-brand">
+        <h2>VICITY CAR</h2>
+        <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.php">📊 Dashboard</a>
+        <a href="agences.php">🏢 Agences</a>
+        <a href="voitures.php" class="active">🚗 Voitures</a>
+        <hr>
+        <a href="../index.php">🏠 Accueil Public</a>
+        <a href="../logout.php">🚪 Déconnexion</a>
+    </nav>
+    <div class="sidebar-footer">
+        <p>&copy; <?php echo date('Y'); ?> VICITY CAR</p>
+    </div>
+</aside>
 
-<h1>Toutes les voitures</h1>
+<div class="sidebar-overlay"></div>
+<button class="sidebar-toggle" aria-label="Menu">☰</button>
 
+<main class="admin-main">
+
+    <div class="page-header">
+        <h1>Toutes les voitures</h1>
+    </div>
+
+<div class="table-wrapper">
 <table border="1" cellpadding="10">
 
 <tr>
@@ -103,11 +125,11 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php if($voiture['disponibilite'] == 1) { ?>
 
-            Disponible
+            <span class="status-pill available">Disponible</span>
 
         <?php } else { ?>
 
-            Indisponible
+            <span class="status-pill unavailable">Indisponible</span>
 
         <?php } ?>
 
@@ -115,17 +137,9 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <td>
 
-        <a href="../agency/edit-car.php?id=<?php echo $voiture['id_voiture']; ?>">
-            Modifier
-        </a>
-
-        <br><br>
-
-        <a href="../crud/delete_car.php?id=<?php echo $voiture['id_voiture']; ?>"
+        <a href="../crud/delete_voiture.php?id=<?php echo $voiture['id_voiture']; ?>"
            onclick="return confirm('Supprimer cette voiture ?');">
-
-            Supprimer
-
+            🗑️ Supprimer
         </a>
 
     </td>
@@ -135,12 +149,11 @@ $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php } ?>
 
 </table>
+</div>
 
-<br>
+</main>
 
-<a href="dashboard.php">
-    Retour Dashboard
-</a>
+<script src="../assets/js/admin.js"></script>
 
 </body>
 </html>

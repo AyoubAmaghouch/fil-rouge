@@ -1,0 +1,516 @@
+/* ================================================================
+   VICITY CAR — Admin Gestion des Agences
+   Modern sidebar layout + enhanced table styling.
+   ================================================================ */
+
+@import url("backend-base.css");
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ADMIN LAYOUT OVERRIDE
+   ═══════════════════════════════════════════════════════════════ */
+
+body.admin-agences {
+    display: flex;
+    min-height: 100vh;
+    background: #0a0d14;
+    margin: 0;
+    max-width: none;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body.admin-agences::before {
+    display: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════════ */
+
+.admin-sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: #111620;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.sidebar-brand {
+    padding: 32px 24px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-brand h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00F5FF 0%, #FF6EC7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    padding: 0;
+    position: static;
+}
+
+.sidebar-brand h2::after {
+    display: none;
+}
+
+.sidebar-brand span {
+    font-size: 0.7rem;
+    color: #6b7280;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: #8a8fa0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(0, 245, 255, 0.05);
+    color: #00F5FF;
+}
+
+.sidebar-nav a.active {
+    background: rgba(0, 245, 255, 0.08);
+    color: #00F5FF;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(0, 245, 255, 0.15);
+}
+
+.sidebar-nav hr {
+    margin: 12px 8px;
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-footer {
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-footer p {
+    font-size: 0.7rem;
+    color: #4b5563;
+    text-align: left;
+    margin: 0;
+}
+
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #171c28;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #00F5FF;
+    font-size: 1.3rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-toggle:hover {
+    background: rgba(0, 245, 255, 0.08);
+    border-color: rgba(0, 245, 255, 0.25);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 899;
+    backdrop-filter: blur(4px);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════════════════════════ */
+
+.admin-main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 44px 48px 48px;
+    min-height: 100vh;
+    width: calc(100% - 260px);
+    min-width: 0;
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(90deg, #ffffff 0%, #00F5FF 55%, #FF6EC7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HIDE OLD ELEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+body.admin-agences .vc-back-nav,
+body.admin-agences > h1,
+body.admin-agences > a {
+    display: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ENHANCED TABLE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Table wrapper for horizontal scroll on mobile */
+.table-wrapper {
+    background: #171c28;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+    width: 100%;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+    table-layout: auto;
+}
+
+.table-wrapper thead {
+    border-bottom: 2px solid rgba(0, 245, 255, 0.08);
+}
+
+.table-wrapper th {
+    background: rgba(0, 245, 255, 0.03);
+    color: #00F5FF;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 18px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Column-specific widths for optimal space usage */
+.table-wrapper th:nth-child(1) { width: 4%; }
+.table-wrapper th:nth-child(2) { width: 8%; }
+.table-wrapper th:nth-child(3) { width: 14%; }
+.table-wrapper th:nth-child(4) { width: 20%; }
+.table-wrapper th:nth-child(5) { width: 13%; }
+.table-wrapper th:nth-child(6) { width: 11%; }
+.table-wrapper th:nth-child(7) { width: 12%; }
+.table-wrapper th:nth-child(8) { width: 18%; }
+
+.table-wrapper td {
+    padding: 13px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    color: #c0c0d8;
+    vertical-align: middle;
+    font-size: 0.84rem;
+}
+
+.table-wrapper tbody tr:hover {
+    background: rgba(0, 245, 255, 0.02);
+}
+
+.table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.008);
+}
+
+/* Agency logo in table */
+.table-wrapper table img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.table-wrapper table img:hover {
+    transform: scale(1.2);
+    border-color: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 245, 255, 0.2);
+}
+
+/* Status badges */
+.status-pill {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.status-pill.valid {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ADE80;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.status-pill.pending {
+    background: rgba(255, 179, 71, 0.1);
+    color: #FFB347;
+    border: 1px solid rgba(255, 179, 71, 0.2);
+}
+
+/* Action buttons in table */
+.table-wrapper td a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 245, 255, 0.12);
+    background: rgba(0, 245, 255, 0.04);
+    color: #00F5FF;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    margin: 2px 3px;
+}
+
+.table-wrapper td a:hover {
+    background: rgba(0, 245, 255, 0.08);
+    color: #00F5FF;
+    border-color: rgba(0, 245, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 245, 255, 0.1);
+}
+
+/* Validate button — green tint */
+.table-wrapper td a.action-validate {
+    background: rgba(74, 222, 128, 0.08);
+    color: #4ADE80;
+    border-color: rgba(74, 222, 128, 0.15);
+}
+
+.table-wrapper td a.action-validate:hover {
+    background: rgba(74, 222, 128, 0.14);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #6EE7A0;
+    box-shadow: 0 4px 16px rgba(74, 222, 128, 0.15);
+}
+
+/* Delete button — red tint */
+.table-wrapper td a.action-delete {
+    background: rgba(248, 113, 113, 0.06);
+    color: #F87171;
+    border-color: rgba(248, 113, 113, 0.15);
+}
+
+.table-wrapper td a.action-delete:hover {
+    background: rgba(248, 113, 113, 0.12);
+    border-color: rgba(248, 113, 113, 0.3);
+    color: #FCA5A5;
+    box-shadow: 0 4px 16px rgba(248, 113, 113, 0.15);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 991px) {
+    .admin-main {
+        padding: 32px 28px 40px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .table-wrapper {
+        border-radius: 12px;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 11px 14px;
+        font-size: 0.78rem;
+    }
+
+    .table-wrapper table img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .table-wrapper td a {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    body.sidebar-open .admin-sidebar {
+        transform: translateX(0);
+        box-shadow: 8px 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .admin-main {
+        margin-left: 0;
+        width: 100%;
+        padding: 24px 16px 32px;
+        padding-top: 72px;
+    }
+
+    .page-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .table-wrapper {
+        border-radius: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 10px 12px;
+        font-size: 0.76rem;
+    }
+
+    .table-wrapper table img {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    .table-wrapper td a {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    /* Hide less critical columns on tablet */
+    .table-wrapper th:nth-child(1),
+    .table-wrapper td:nth-child(1) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main {
+        padding: 16px 10px 24px;
+        padding-top: 68px;
+    }
+
+    .page-header h1 {
+        font-size: 1.15rem;
+        letter-spacing: 1px;
+    }
+
+    .table-wrapper {
+        border-radius: 10px;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 8px 10px;
+        font-size: 0.72rem;
+    }
+
+    .table-wrapper table img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+    }
+
+    .table-wrapper td a {
+        font-size: 0.66rem;
+        padding: 5px 9px;
+        margin: 1px 1px;
+    }
+
+    /* Hide ID and Ville columns on small phones */
+    .table-wrapper th:nth-child(6),
+    .table-wrapper td:nth-child(6) {
+        display: none;
+    }
+}

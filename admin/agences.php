@@ -8,162 +8,97 @@ if (!isset($_SESSION['id_admin'])) {
 }
 
 require_once '../config/db.php';
-require_once '../config/db.php';
 
-$sql = "SELECT * FROM agences
-        WHERE statut_validation = 0";
-
+$sql = "SELECT * FROM agences ORDER BY id_agence DESC";
 $stmt = $pdo->query($sql);
-
 $agences = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validation Agences — VICITY CAR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/backend.css">
-</head>
-<body>
-
-<h1>Agences en attente</h1>
-
-<table border="1">
-
-    <?php
-
-
-
-if (!isset($_SESSION['id_admin'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-require_once '../config/db.php';
-
-$sql = "SELECT *
-        FROM agences
-        ORDER BY id_agence DESC";
-
-$stmt = $pdo->query($sql);
-
-$agences = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-?>
-
-<!DOCTYPE html>
-
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Agences — VICITY CAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/backend.css">
+    <link rel="stylesheet" href="../assets/css/admin-agences.css">
 </head>
-<body>
+<body class="admin-agences">
 
-<nav class="vc-back-nav">
-    <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
-    <a href="../index.php">🏠 Accueil</a>
-</nav>
+<!-- Sidebar -->
+<aside class="admin-sidebar">
+    <div class="sidebar-brand">
+        <h2>VICITY CAR</h2>
+        <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.php">📊 Dashboard</a>
+        <a href="agences.php" class="active">🏢 Agences</a>
+        <a href="voitures.php">🚗 Voitures</a>
+        <hr>
+        <a href="../index.php">🏠 Accueil Public</a>
+        <a href="../logout.php">🚪 Déconnexion</a>
+    </nav>
+    <div class="sidebar-footer">
+        <p>&copy; <?php echo date('Y'); ?> VICITY CAR</p>
+    </div>
+</aside>
 
-<h1>Gestion des Agences</h1>
+<div class="sidebar-overlay"></div>
+<button class="sidebar-toggle" aria-label="Menu">☰</button>
 
-<table border="1">
+<main class="admin-main">
+    <div class="page-header">
+        <h1>Gestion des Agences</h1>
+    </div>
 
-<tr>
-    <th>ID</th>
-    <th>Logo</th>
-    <th>Nom</th>
-    <th>Email</th>
-    <th>Téléphone</th>
-    <th>Ville</th>
-    <th>Statut</th>
-    <th>Actions</th>
-</tr>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Logo</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Ville</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($agences as $agence): ?>
+                <tr>
+                    <td data-label="ID"><?php echo $agence['id_agence']; ?></td>
+                    <td data-label="Logo">
+                        <img src="../assets/images/agences/<?php echo $agence['logo']; ?>" alt="Logo <?php echo $agence['nom_agence']; ?>">
+                    </td>
+                    <td data-label="Nom"><?php echo $agence['nom_agence']; ?></td>
+                    <td data-label="Email"><?php echo $agence['email']; ?></td>
+                    <td data-label="Téléphone"><?php echo $agence['telephone']; ?></td>
+                    <td data-label="Ville"><?php echo $agence['ville']; ?></td>
+                    <td data-label="Statut">
+                        <?php if($agence['statut_validation'] == 1): ?>
+                            <span class="status-pill valid">Validée</span>
+                        <?php else: ?>
+                            <span class="status-pill pending">Non validée</span>
+                        <?php endif; ?>
+                    </td>
+                    <td data-label="Actions">
+                        <?php if($agence['statut_validation'] == 0): ?>
+                            <a href="../crud/valider_agence.php?id=<?php echo $agence['id_agence']; ?>" class="action-validate">✅ Valider</a>
+                        <?php endif; ?>
+                        <a href="../crud/supprimer_agence.php?id=<?php echo $agence['id_agence']; ?>"
+                           onclick="return confirm('Supprimer cette agence ?');" class="action-delete">🗑️ Supprimer</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</main>
 
-<?php foreach($agences as $agence) { ?>
-
-<tr>
-
-    <td><?php echo $agence['id_agence']; ?></td>
-
-    <td>
-        <img
-        src="../assets/images/agences/<?php echo $agence['logo']; ?>"
-        width="80">
-    </td>
-
-    <td><?php echo $agence['nom_agence']; ?></td>
-
-    <td><?php echo $agence['email']; ?></td>
-
-    <td><?php echo $agence['telephone']; ?></td>
-
-    <td><?php echo $agence['ville']; ?></td>
-
-    <td>
-
-        <?php if($agence['statut_validation'] == 1) { ?>
-
-            Validée
-
-        <?php } else { ?>
-
-            Non validée
-
-        <?php } ?>
-
-    </td>
-
-    <td>
-
-        <?php if($agence['statut_validation'] == 0) { ?>
-
-            <a href="../crud/valider_agence.php?id=<?php echo $agence['id_agence']; ?>">
-                Valider
-            </a>
-
-            <br><br>
-
-        <?php } ?>
-
-        <a href="../crud/modifier_agence.php?id=<?php echo $agence['id_agence']; ?>">
-            Modifier
-        </a>
-
-        <br><br>
-
-        <a href="../crud/supprimer_agence.php?id=<?php echo $agence['id_agence']; ?>"
-           onclick="return confirm('Supprimer cette agence ?');">
-            Supprimer
-        </a>
-
-    </td>
-
-</tr>
-
-<?php } ?>
-
-
-</table>
-
-<br>
-
-<a href="dashboard.php">
-    Retour Dashboard
-</a>
-
-</body>
-</html>
-
-
-</table>
-
+<script src="../assets/js/admin.js"></script>
 </body>
 </html>

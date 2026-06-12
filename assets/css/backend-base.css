@@ -1,8 +1,17 @@
 /* ================================================================
-   VICITY CAR — BACKEND PAGES  v2
-   Clean, centered, professional GTA Vice City styling.
-   Targets existing HTML elements only — no classes needed.
+   VICITY CAR — Backend Base Styles
+   Shared across all admin & agency management pages.
+   Do NOT link directly — import from page-specific CSS files.
    ================================================================ */
+
+@charset "UTF-8";
+
+
+/* ── BOX-SIZING ── */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 
 /* ── BASE ── */
@@ -30,7 +39,7 @@ body::before {
     background: radial-gradient(circle, rgba(0, 245, 255, 0.04) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
 }
 
 
@@ -170,7 +179,7 @@ a:hover {
 }
 
 
-/* ── STANDALONE ACTION LINKS  (p > a) ── */
+/* ── STANDALONE ACTION LINKS (p > a) ── */
 
 p > a {
     display: inline-flex;
@@ -197,7 +206,7 @@ p > a:hover {
 }
 
 
-/* ── "Retour Dashboard" — standalone link outside <p> ── */
+/* ── BODY-LEVEL STANDALONE LINK (e.g. "Retour Dashboard") ── */
 
 body > a {
     display: inline-flex;

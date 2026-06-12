@@ -19,16 +19,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ajouter une Voiture — VICITY CAR</title>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../assets/css/backend.css">
+        <link rel="stylesheet" href="../assets/css/agency-add-car.css">
     </head>
-    <body>
+    <body class="agency-add-car">
 
-    <nav class="vc-back-nav">
-        <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
-        <a href="../index.php">🏠 Accueil</a>
-    </nav>
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h2>VICITY CAR</h2>
+            <span>Agence Panel</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.php">📊 Dashboard</a>
+            <a href="my-cars.php">🚗 Mes Voitures</a>
+            <a href="add-car.php" class="active">➕ Ajouter une Voiture</a>
+            <hr>
+            <a href="../index.php">🏠 Accueil Public</a>
+            <a href="../logout.php">🚪 Déconnexion</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>&copy; <?php echo date('Y'); ?> VICITY CAR</p>
+        </div>
+    </aside>
 
-    <h1>Ajouter une voiture</h1>
+    <div class="sidebar-overlay"></div>
+    <button class="sidebar-toggle" aria-label="Menu">☰</button>
+
+    <main class="admin-main">
+
+        <div class="page-header">
+            <h1>Ajouter une voiture</h1>
+        </div>
 
     <form action="../crud/add_voiture.php" method="POST" enctype="multipart/form-data">
 
@@ -100,6 +121,10 @@
         </button>
 
     </form>
+
+    </main>
+
+    <script src="../assets/js/agency.js"></script>
 
     </body>
     </html>

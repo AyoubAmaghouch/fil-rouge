@@ -29,56 +29,79 @@ $nb_attente = $pdo->query("SELECT COUNT(*) FROM agences
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin — VICITY CAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/backend.css">
+    <link rel="stylesheet" href="../assets/css/admin-dashboard.css">
 </head>
-<body>
+<body class="admin-dashboard">
 
-<nav class="vc-back-nav">
-    <a href="javascript:void(0)" onclick="history.back()">← Retour</a>
-    <a href="../index.php">🏠 Accueil</a>
-</nav>
+<!-- Sidebar -->
+<aside class="admin-sidebar">
+    <div class="sidebar-brand">
+        <h2>VICITY CAR</h2>
+        <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.php" class="active">📊 Dashboard</a>
+        <a href="agences.php">🏢 Agences</a>
+        <a href="voitures.php">🚗 Voitures</a>
+        <hr>
+        <a href="../index.php">🏠 Accueil Public</a>
+        <a href="../logout.php">🚪 Déconnexion</a>
+    </nav>
+    <div class="sidebar-footer">
+        <p>&copy; <?php echo date('Y'); ?> VICITY CAR</p>
+    </div>
+</aside>
 
-<h1>Dashboard Admin</h1>
+<!-- Sidebar overlay (mobile) -->
+<div class="sidebar-overlay"></div>
 
-<hr>
+<!-- Hamburger toggle -->
+<button class="sidebar-toggle" aria-label="Menu">☰</button>
 
-<h2>Statistiques</h2>
+<!-- Main Content -->
+<main class="admin-main">
 
-<p>
-    Nombre d'agences :
-    <?php echo $nb_agences; ?>
-</p>
+    <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Vue d'ensemble de la plateforme VICITY CAR</p>
+    </div>
 
-<p>
-    Nombre de voitures :
-    <?php echo $nb_voitures; ?>
-</p>
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card stat-cyan">
+            <div class="stat-icon">🏢</div>
+            <div class="stat-info">
+                <span class="stat-value" data-count="<?php echo $nb_agences; ?>">0</span>
+                <span class="stat-label">Agences</span>
+            </div>
+        </div>
+        <div class="stat-card stat-pink">
+            <div class="stat-icon">🚗</div>
+            <div class="stat-info">
+                <span class="stat-value" data-count="<?php echo $nb_voitures; ?>">0</span>
+                <span class="stat-label">Voitures</span>
+            </div>
+        </div>
+        <div class="stat-card stat-amber">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+                <span class="stat-value" data-count="<?php echo $nb_attente; ?>">0</span>
+                <span class="stat-label">En attente</span>
+            </div>
+        </div>
+    </div>
 
-<p>
-    Agences en attente :
-    <?php echo $nb_attente; ?>
-</p>
+    <!-- Management Section -->
+    <h3 class="section-title">Gestion</h3>
+    <div class="management-links">
+        <a href="agences.php">🏢 Gérer les agences</a>
+        <a href="voitures.php">🚗 Voir les voitures</a>
+        <a href="../logout.php" class="logout-link">🚪 Déconnexion</a>
+    </div>
 
-<hr>
+</main>
 
-<h2>Gestion</h2>
-
-<p>
-    <a href="agences.php">
-        Gérer les agences
-    </a>
-</p>
-
-<p>
-    <a href="voitures.php">
-        Voir les voitures
-    </a>
-</p>
-<p>
-    <a href="../logout.php">
-        Déconnexion
-    </a>
-</p>
+<script src="../assets/js/admin.js"></script>
 
 </body>
 </html>

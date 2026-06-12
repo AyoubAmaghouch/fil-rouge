@@ -9,6 +9,13 @@ $page_css = "assets/css/login.css";
 
     <div class="vc-login-container">
 
+        <?php if (isset($_SESSION['flash_message'])): ?>
+        <div class="vc-flash-notification">
+            <span class="vc-flash-icon">⏳</span>
+            <span class="vc-flash-text"><?php echo $_SESSION['flash_message']; unset($_SESSION['flash_message']); ?></span>
+        </div>
+        <?php endif; ?>
+
         <!-- ===== DECORATIVE GLOW ===== -->
 
         <div class="vc-login-glow"></div>
