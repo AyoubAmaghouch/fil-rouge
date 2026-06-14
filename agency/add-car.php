@@ -111,8 +111,9 @@
 
         <br><br>
 
-        <label>Photo voiture :</label><br>  
-        <input type="file" name="image" required>
+        <label>Photos voiture (max 5) :</label><br>
+        <input type="file" name="images[]" multiple accept="image/*">
+        <small style="color:#8a8aa0;display:block;margin-top:4px;">Vous pouvez sélectionner jusqu'à 5 images. Formats acceptés : JPG, PNG, WebP.</small>
 
         <br><br>
 

@@ -9,12 +9,11 @@ if (!isset($_SESSION['id_agence'])) {
 
 require_once '../config/db.php';
 
-$sql = "SELECT voitures.*, marques.nom_marque, images_voitures.image
+$sql = "SELECT voitures.*, marques.nom_marque,
+               (SELECT image FROM images_voitures WHERE id_voiture = voitures.id_voiture ORDER BY id_image ASC LIMIT 1) AS image
         FROM voitures
         INNER JOIN marques
         ON voitures.id_marque = marques.id_marque
-        LEFT JOIN images_voitures
-        ON voitures.id_voiture = images_voitures.id_voiture
         WHERE voitures.id_agence = ?"; //Jib ghir tomobilat dyal agence 3
 
 $stmt = $pdo->prepare($sql);

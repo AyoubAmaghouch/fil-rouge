@@ -6,11 +6,10 @@ require_once 'config/db.php';
 // Fetch the latest 6 available cars
 $sql_cars = "SELECT v.id_voiture, v.modele, v.prix,
                     m.nom_marque,
-                    iv.image
+                    (SELECT image FROM images_voitures WHERE id_voiture = v.id_voiture ORDER BY id_image ASC LIMIT 1) AS image
              FROM voitures v
              INNER JOIN marques m ON v.id_marque = m.id_marque
              INNER JOIN agences a ON v.id_agence = a.id_agence
-             LEFT JOIN images_voitures iv ON v.id_voiture = iv.id_voiture
              WHERE a.statut_validation = 1
                AND v.disponibilite = 1
              ORDER BY v.id_voiture DESC

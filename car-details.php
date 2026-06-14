@@ -9,13 +9,13 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
+/* ── Car info (without image join — images fetched separately) ── */
 $sql = "SELECT voitures.*,
                marques.nom_marque,
                agences.nom_agence,
                agences.telephone,
                agences.ville,
-               agences.id_agence,
-               images_voitures.image
+               agences.id_agence
 
         FROM voitures
 
@@ -24,9 +24,6 @@ $sql = "SELECT voitures.*,
 
         INNER JOIN agences
         ON voitures.id_agence = agences.id_agence
-
-        LEFT JOIN images_voitures
-        ON voitures.id_voiture = images_voitures.id_voiture
 
         WHERE voitures.id_voiture = ?";
 
@@ -38,6 +35,16 @@ $voiture = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$voiture) {
     die("Voiture introuvable");
 }
+
+/* ── All images for this car ── */
+$sql_img = "SELECT image FROM images_voitures
+            WHERE id_voiture = ?
+            ORDER BY id_image ASC";
+
+$stmt_img = $pdo->prepare($sql_img);
+$stmt_img->execute([$id]);
+
+$images = $stmt_img->fetchAll(PDO::FETCH_COLUMN);
 
 ?>
 
@@ -65,16 +72,38 @@ if (!$voiture) {
 
                 <!-- Image Gallery -->
                 <div class="vc-cd-gallery">
-                    <img
-                        src="assets/images/voitures/<?php echo !empty($voiture['image']) ? htmlspecialchars($voiture['image']) : 'default.jpg'; ?>"
-                        alt="<?php echo htmlspecialchars($voiture['nom_marque'] . ' ' . $voiture['modele']); ?>"
-                        class="vc-cd-main-img"
-                    >
-                    <?php if($voiture['disponibilite'] == 1) { ?>
-                        <span class="vc-cd-badge vc-cd-badge-dispo">Disponible</span>
-                    <?php } else { ?>
-                        <span class="vc-cd-badge vc-cd-badge-indispo">Indisponible</span>
-                    <?php } ?>
+
+                    <div class="vc-cd-main-wrap">
+                        <img
+                            id="vcCdMainImg"
+                            src="assets/images/voitures/<?php echo !empty($images[0]) ? htmlspecialchars($images[0]) : 'default.jpg'; ?>"
+                            alt="<?php echo htmlspecialchars($voiture['nom_marque'] . ' ' . $voiture['modele']); ?>"
+                            class="vc-cd-main-img"
+                        >
+                        <?php if($voiture['disponibilite'] == 1) { ?>
+                            <span class="vc-cd-badge vc-cd-badge-dispo">Disponible</span>
+                        <?php } else { ?>
+                            <span class="vc-cd-badge vc-cd-badge-indispo">Indisponible</span>
+                        <?php } ?>
+                    </div>
+
+                    <?php if (count($images) > 1): ?>
+                        <div class="vc-cd-thumbs">
+                            <?php foreach ($images as $img): ?>
+                                <button
+                                    type="button"
+                                    class="vc-cd-thumb<?php echo ($img === $images[0]) ? ' active' : ''; ?>"
+                                    onclick="document.getElementById('vcCdMainImg').src='assets/images/voitures/<?php echo htmlspecialchars($img); ?>';this.parentElement.querySelectorAll('.vc-cd-thumb').forEach(b=>b.classList.remove('active'));this.classList.add('active');"
+                                >
+                                    <img
+                                        src="assets/images/voitures/<?php echo htmlspecialchars($img); ?>"
+                                        alt="Photo"
+                                    >
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
 
                 <!-- Info Card -->

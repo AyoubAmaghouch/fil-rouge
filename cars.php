@@ -16,7 +16,7 @@ $sql = "SELECT voitures.*,
                marques.nom_marque,
                agences.nom_agence,
                agences.ville,
-               images_voitures.image
+               (SELECT image FROM images_voitures WHERE id_voiture = voitures.id_voiture ORDER BY id_image ASC LIMIT 1) AS image
 
         FROM voitures
 
@@ -25,9 +25,6 @@ $sql = "SELECT voitures.*,
 
         INNER JOIN agences
         ON voitures.id_agence = agences.id_agence
-
-        LEFT JOIN images_voitures
-        ON voitures.id_voiture = images_voitures.id_voiture
 
         WHERE agences.statut_validation = 1
 ";

@@ -90,14 +90,20 @@
 
 /* ================================================================
    4. IMAGE GALLERY
+   Main image + thumbnail strip.
    ================================================================ */
 
 .vc-cd-gallery {
+    margin-bottom: 28px;
+}
+
+/* ── Main image wrap ── */
+.vc-cd-main-wrap {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(0, 245, 255, 0.12);
-    margin-bottom: 28px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 
 .vc-cd-main-img {
@@ -105,15 +111,10 @@
     height: 450px;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
-.vc-cd-gallery:hover .vc-cd-main-img {
-    transform: scale(1.03);
-}
-
-/* Bottom gradient overlay */
-.vc-cd-gallery::after {
+.vc-cd-main-wrap::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -121,6 +122,59 @@
     right: 0;
     height: 80px;
     background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 15, 0.6) 100%);
+    pointer-events: none;
+}
+
+/* ── Thumbnail strip ── */
+.vc-cd-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.vc-cd-thumb {
+    width: 90px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.vc-cd-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.vc-cd-thumb:hover {
+    border-color: rgba(0, 245, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 245, 255, 0.15);
+}
+
+.vc-cd-thumb:hover img {
+    transform: scale(1.08);
+}
+
+.vc-cd-thumb.active {
+    border-color: #00F5FF;
+    box-shadow: 0 0 16px rgba(0, 245, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.vc-cd-thumb.active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 245, 255, 0.08);
     pointer-events: none;
 }
 
@@ -452,6 +506,12 @@
         height: 350px;
     }
 
+    .vc-cd-thumb {
+        width: 80px;
+        height: 62px;
+        border-radius: 8px;
+    }
+
     .vc-cd-info-grid {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
@@ -484,6 +544,16 @@
 
     .vc-cd-main-img {
         height: 250px;
+    }
+
+    .vc-cd-thumbs {
+        gap: 8px;
+    }
+
+    .vc-cd-thumb {
+        width: 68px;
+        height: 52px;
+        border-radius: 8px;
     }
 
     .vc-cd-info-card {

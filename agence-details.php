@@ -25,10 +25,10 @@ if (!$agence) {
 
 /* Récupérer les voitures de l'agence */
 
-$sql_voitures = "SELECT v.*, m.nom_marque, iv.image
+$sql_voitures = "SELECT v.*, m.nom_marque,
+                        (SELECT image FROM images_voitures WHERE id_voiture = v.id_voiture ORDER BY id_image ASC LIMIT 1) AS image
                  FROM voitures v
                  INNER JOIN marques m ON v.id_marque = m.id_marque
-                 LEFT JOIN images_voitures iv ON v.id_voiture = iv.id_voiture
                  WHERE v.id_agence = ?
                  ORDER BY v.id_voiture DESC";
 
