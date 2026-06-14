@@ -3,17 +3,17 @@ session_start();
 $page_css = "assets/css/index.css";
 require_once 'config/db.php';
 
-// Fetch the latest 6 available cars
+// Fetch the latest 6 available cars and validé (/1voiture mraqe=nom-marque) (/2 voiture agnces validation=1) (/3 voiture disponibilité=1) (/4 order by id desc) (/5 limit 6)
 $sql_cars = "SELECT v.id_voiture, v.modele, v.prix,
                     m.nom_marque,
                     (SELECT image FROM images_voitures WHERE id_voiture = v.id_voiture ORDER BY id_image ASC LIMIT 1) AS image
              FROM voitures v
-             INNER JOIN marques m ON v.id_marque = m.id_marque
+             INNER JOIN marques m ON v.id_marque = m.id_marque 
              INNER JOIN agences a ON v.id_agence = a.id_agence
              WHERE a.statut_validation = 1
                AND v.disponibilite = 1
              ORDER BY v.id_voiture DESC
-             LIMIT 6";
+             LIMIT 6"; 
 
 $voitures_home = $pdo->query($sql_cars)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -36,7 +36,7 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="container">
 
-        <div class="hero-content">
+        <div class="hero-content"> 
 
             <h1>
                 LOUEZ LA VOITURE <br>
@@ -48,7 +48,7 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
                 par des agences fiables partout au Maroc.
             </p>
 
-            <a href="cars.php" class="hero-btn">
+            <a href="cars.php" class="hero-btn"> <!--  button to view all cars -->
                 Voir les voitures
             </a>
 
@@ -62,9 +62,9 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="vc-about-section">
 
-    <div class="container">
+    <div class="container"> <!-- Container for the about us section and make it responsive-->
 
-        <div class="vc-about-inner">
+        <div class="vc-about-inner"> 
 
             <!-- Decorative glow -->
             <div class="vc-about-glow"></div>
@@ -99,7 +99,7 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
                     <span>Agences de location vérifiées et approuvées</span>
                 </div>
                 <div class="vc-feature">
-                    <i class="bi bi-check-circle-fill"></i>
+                    <i class="bi bi-check-circle-fill"></i> <!--  check mark icon bosstrap-->
                     <span>Toutes les offres réunies en un seul endroit</span>
                 </div>
                 <div class="vc-feature">
@@ -110,9 +110,9 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
 
             <!-- CTA -->
             <div class="text-center mt-5">
-                <a href="cars.php" class="vc-view-all-btn">
+                <a href="cars.php" class="vc-view-all-btn"> <!--  button to view all cars -->
                     Explorer nos voitures
-                    <span class="vc-btn-arrow">→</span>
+                    <span class="vc-btn-arrow">→</span> 
                 </a>
             </div>
 
@@ -142,10 +142,10 @@ $agences_home = $pdo->query($sql_agences)->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <!-- Services Grid -->
-        <div class="row g-4">
+        <div class="row g-4"> <!--  g-4 ligne bootstrap + espace bin les cartes  -->
 
             <!-- Service 1 -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-12"> 
                 <div class="vc-service-card">
                     <div class="vc-service-icon-wrap vc-icon-cyan">
                         <i class="bi bi-car-front-fill"></i>

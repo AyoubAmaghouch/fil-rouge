@@ -65,7 +65,7 @@
                     </li>
                     <li>
                         <i class="bi bi-telephone-fill"></i>
-                        <span>+212 600 000 000</span>
+                        <span>+212 609244835</span>
                     </li>
                     <li>
                         <i class="bi bi-clock-fill"></i>

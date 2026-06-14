@@ -30,7 +30,7 @@ $sql_voitures = "SELECT v.*, m.nom_marque,
                  FROM voitures v
                  INNER JOIN marques m ON v.id_marque = m.id_marque
                  WHERE v.id_agence = ?
-                 ORDER BY v.id_voiture DESC";
+                 ORDER BY v.id_voiture DESC"; 
 
 $stmt_v = $pdo->prepare($sql_voitures);
 $stmt_v->execute([$id]);

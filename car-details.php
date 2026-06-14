@@ -25,12 +25,12 @@ $sql = "SELECT voitures.*,
         INNER JOIN agences
         ON voitures.id_agence = agences.id_agence
 
-        WHERE voitures.id_voiture = ?";
+        WHERE voitures.id_voiture = ?"; // id_voiture = ? pour sécuriser la requete et éviter les injections SQL
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$id]);
+$stmt = $pdo->prepare($sql); // préparer la requete pour éviter les injections SQL
+$stmt->execute([$id]);  // exécuter la requete avec le paramètre id_voiture
 
-$voiture = $stmt->fetch(PDO::FETCH_ASSOC);
+$voiture = $stmt->fetch(PDO::FETCH_ASSOC); // fetch la voiture en tant que tableau associatif (clé = nom de colonne) pour pouvoir accéder aux données facilement
 
 if (!$voiture) {
     die("Voiture introuvable");
@@ -39,12 +39,12 @@ if (!$voiture) {
 /* ── All images for this car ── */
 $sql_img = "SELECT image FROM images_voitures
             WHERE id_voiture = ?
-            ORDER BY id_image ASC";
+            ORDER BY id_image ASC"; // on récupère toutes les images de la voiture triées par id_image pour que la première soit l'image principale
 
-$stmt_img = $pdo->prepare($sql_img);
-$stmt_img->execute([$id]);
+$stmt_img = $pdo->prepare($sql_img);// préparer la requete pour éviter les injections SQL
+$stmt_img->execute([$id]);// exécuter la requete avec le paramètre id_voiture
 
-$images = $stmt_img->fetchAll(PDO::FETCH_COLUMN);
+$images = $stmt_img->fetchAll(PDO::FETCH_COLUMN);// fetchAll avec FETCH_COLUMN pour récupérer un tableau simple des noms d'images au lieu de tableaux associatifs
 
 ?>
 

@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-
+// Check each image
         for ($i = 0; $i < $count; $i++) {
 
             $tmp_name = $files['tmp_name'][$i];

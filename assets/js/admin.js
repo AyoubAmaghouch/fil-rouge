@@ -3,10 +3,10 @@
  * Counter animations + sidebar mobile toggle.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { // Wait for the html to be fully loaded
 
     /* ── ANIMATED STAT COUNTERS ── */
-    const statValues = document.querySelectorAll('.stat-value');
+    const statValues = document.querySelectorAll('.stat-value'); // Select all elements with the class 'stat-value'
 
     if (statValues.length) {
         const observer = new IntersectionObserver(

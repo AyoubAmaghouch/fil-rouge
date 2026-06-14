@@ -8,9 +8,9 @@ require_once 'config/db.php';
 $marque = $_GET['marque'] ?? '';
 $transmission = $_GET['transmission'] ?? '';
 $carburant = $_GET['carburant'] ?? '';
-$ville = $_GET['ville'] ?? '';
+$ville = $_GET['ville'] ?? ''; //kanjbo les valuers de user me URL
 
-/* Requête principale */
+/* Requête principale /// marque.nom_marque kanjbo me table de marques */
 
 $sql = "SELECT voitures.*,
                marques.nom_marque,
@@ -131,11 +131,11 @@ $villes = $pdo->query("
 
     <div class="container">
 
-        <form method="GET" action="cars.php" class="vc-cars-filters">
+        <form method="GET" action="cars.php" class="vc-cars-filters"> <!--  formulair de filter katba3 les donné url -->
 
             <select name="marque">
                 <option value="">Toutes les marques</option>
-                <?php while($m = $marques->fetch(PDO::FETCH_ASSOC)) { ?>
+                <?php while($m = $marques->fetch(PDO::FETCH_ASSOC)) { ?><!--  boucle pour afficher les marques li jaw me database -->
                     <option
                         value="<?php echo $m['nom_marque']; ?>"
                         <?php if($marque == $m['nom_marque']) echo "selected"; ?>
